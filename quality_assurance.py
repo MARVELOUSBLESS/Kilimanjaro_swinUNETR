@@ -97,7 +97,15 @@ def load_patient_to_tensor(path_2_patient:str):
 
     # load each nifti image
     patient_tensors = dict((os.path.basename(img_name).split(".")[0], torch.from_numpy(load_1_nifti(img_name))) for img_name in path_2_nifties)
-    print(patient_tensors.keys())
+    # print(patient_tensors.keys())
+
+    label = torch.zeros_like(list(patient_tensors.values())[0].shape)
+    input = torch.Tensor()
+
+    for key in patient_tensors:
+        if "seg" in key:
+            label = patient_tensors[key]
+        
 
     
 
