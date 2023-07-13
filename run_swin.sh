@@ -24,10 +24,10 @@ path_data='/scratch/guest183/BraTS_Africa_data/'
 # code to run the main method of the SWIN UNER network
 # echo $path_swin'main.py'
 # to train on multiple GPU
-# python $path_swin'main.py' --save_checkpoint --distributed --lrschedule='cosine_anneal' --json_list=$path_swin'jsons/brats23_africa_folds.json' --sw_batch_size=4 --batch_size=2 --data_dir=$path_data --val_every=60 --infer_overlap=0.7 --in_channels=4 --spatial_dims=3 --use_checkpoint --feature_size=48 --max_epochs=60 --logdir='4_gpu_60_epochs'
+python $path_swin'main.py' --cache_dataset --save_checkpoint --distributed --lrschedule='cosine_anneal' --json_list=$path_swin'jsons/brats23_africa_folds.json' --sw_batch_size=4 --batch_size=2 --data_dir=$path_data --val_every=60 --infer_overlap=0.7 --in_channels=4 --spatial_dims=3 --use_checkpoint --feature_size=48 --max_epochs=60 --logdir='4_gpu_60_epochs_cached'
 
 # this is a code to do Quality assuarance on a trained model 
-python quality_assurance.py
+# python quality_assurance.py
 # code to test the json generator
 # python kfold_json_generator.py
 

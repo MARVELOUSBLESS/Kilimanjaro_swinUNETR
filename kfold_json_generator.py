@@ -58,18 +58,18 @@ def main():
     # for brats 2021 
     # path_2_img = "/scratch/guest183/BraTS_2021_data/RSNA_ASNR_MICCAI_BraTS2021_TrainingData_16July2021/TrainingData/BraTS2021_00000/BraTS2021_00000_seg.nii.gz"
     # for brats 2023 africa 
-    path_2_img = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00387-000/BraTS-GLI-00387-000-seg.nii.gz"
-    view_data_shape(path_2_img)
+    # path_2_img = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00387-000/BraTS-GLI-00387-000-seg.nii.gz"
+    # view_data_shape(path_2_img)
 
     # generate json file containing the path to n fold cross validation data 
-    # # get the number of folds
-    # num_folds:int = 5
-    # # get the path to the patient image folders
-    # data_dir:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
-    # kfold_dict:dict = kfold_data_dict(data_dir, num_folds)
-    # # print(len(kfold_dict["training"]))
-    # with open("brats23_africa_folds.json", 'w') as outfile:
-    #     json.dump(kfold_dict, outfile, indent=4)
+    # get the number of folds
+    num_folds:int = 5
+    # get the path to the patient image folders
+    data_dir:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
+    kfold_dict:dict = kfold_data_dict(data_dir, num_folds)
+    # print(len(kfold_dict["training"]))
+    with open("brats23_africa_folds.json", 'w') as outfile:
+        json.dump(kfold_dict, outfile, indent=4)
 
 # DO NOT DELETE
 if __name__ == "__main__":
