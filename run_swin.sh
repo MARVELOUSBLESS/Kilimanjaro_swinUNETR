@@ -1,10 +1,11 @@
 #!/bin/bash
-#SBATCH --account def-training-wa
+#SBATCH --account=def-training-wa
 # SBATCH --reservation hackathon-wr-gpu
+#SBATCH --nodes=2
 #SBATCH --gpus-per-node=t4:4
 #SBATCH --cpus-per-task=8
-#SBATCH --mem=64G
-#SBATCH --time=6:00:00
+#SBATCH --mem=128G
+#SBATCH --time=1:00:00
 module load python/3.9
 source /home/guest183/run_swinUNETR_kilimanjaro/SWIN_ENV/bin/activate
 # to solve the monai resolve_mode error 
@@ -24,8 +25,9 @@ path_data='/scratch/guest183/BraTS_Africa_data/'
 # code to run the main method of the SWIN UNER network
 # echo $path_swin'main.py'
 # to train on multiple GPU
-python $path_swin'main.py' --cache_dataset --save_checkpoint --distributed --lrschedule='cosine_anneal' --json_list=$path_swin'jsons/brats23_africa_folds.json' --sw_batch_size=4 --batch_size=2 --data_dir=$path_data --val_every=60 --infer_overlap=0.7 --in_channels=4 --spatial_dims=3 --use_checkpoint --feature_size=48 --max_epochs=60 --logdir='4_gpu_60_epochs_cached'
+python $path_swin'main.py' --world_size=2 --distributed --lrschedule='cosine_anneal' --json_list=$path_swin'jsons/brats23_africa_folds.json' --sw_batch_size=4 --batch_size=2 --data_dir=$path_data --val_every=60 --infer_overlap=0.7 --in_channels=4 --spatial_dims=3 --use_checkpoint --feature_size=48 --max_epochs=60 --logdir='4_gpu_60_epochs_cached'
 
+# --smartcache_dataset --save_checkpoint
 # this is a code to do Quality assuarance on a trained model 
 # python quality_assurance.py
 # code to test the json generator
