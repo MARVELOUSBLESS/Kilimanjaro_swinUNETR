@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=def-training-wa
 # SBATCH --reservation hackathon-wr-gpu
-#SBATCH --nodes=2
+#SBATCH --nodes=1
 #SBATCH --gpus-per-node=t4:4
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=128G
