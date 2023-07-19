@@ -99,6 +99,8 @@ def main():
     args.logdir = "./runs/" + args.logdir
     # print(args)
     # return 0
+    accelerator = Accelerator()
+    device = accelerator.device
 
     if args.distributed:
         args.ngpus_per_node = torch.cuda.device_count()
@@ -110,9 +112,7 @@ def main():
 
 
 def main_worker(gpu, args):
-    accelerator = Accelerator()
-    device = accelerator.device
-
+    
     if args.distributed:
         torch.multiprocessing.set_start_method("fork", force=True)
     np.set_printoptions(formatter={"float": "{: 0.3f}".format}, suppress=True)
