@@ -99,9 +99,9 @@ def main():
     args.logdir = "./runs/" + args.logdir
     # print(args)
     # return 0
-    accelerator = Accelerator()
-    device = accelerator.device
 
+    args.accelerator=Accelerator()
+    
     if args.distributed:
         args.ngpus_per_node = torch.cuda.device_count()
         print("Found total gpus", args.ngpus_per_node)
@@ -220,6 +220,8 @@ def main_worker(gpu, args):
         scheduler = None
 
     semantic_classes = ["Dice_Val_TC", "Dice_Val_WT", "Dice_Val_ET"]
+
+    model, optimizer, loader[0] = accelerator.prepare(model, optimizer, loader[0])
 
     accuracy = run_training(
         model=model,
