@@ -23,4 +23,8 @@ path_swin='/home/guest183/research-contributions/SwinUNETR/BRATS21/'
 path_data='/scratch/guest183/BraTS_Africa_data/'
 
 
-srun python $path_swin'main.py' --world_size=2 --distributed --use_checkpoint --lrschedule='cosine_anneal' --dist-url="tcp://$MASTER_ADDR:3456" --json_list=$path_swin'jsons/brats23_africa_folds.json' --sw_batch_size=4 --batch_size=2 --data_dir=$path_data --val_every=60 --infer_overlap=0.7 --in_channels=4 --spatial_dims=3 --feature_size=48 --max_epochs=60 --logdir='8_gpu_80_epochs'
+srun python $path_swin'main.py' --world_size=2 --distributed --use_checkpoint \ 
+    --lrschedule='cosine_anneal' --dist-url="tcp://$MASTER_ADDR:3456" \ 
+    --json_list=$path_swin'jsons/brats23_africa_folds.json' --sw_batch_size=4 --batch_size=2 \
+    --data_dir=$path_data --val_every=60 --infer_overlap=0.7 --in_channels=4 --spatial_dims=3 \
+    --feature_size=48 --max_epochs=60 --logdir='8_gpu_80_epochs'
