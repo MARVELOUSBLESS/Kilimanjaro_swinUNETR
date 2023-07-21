@@ -96,9 +96,10 @@ def main():
         for i, batch in enumerate(test_loader):
             image = batch["image"].cuda()
             affine = batch["image_meta_dict"]["original_affine"][0].numpy()
-            num = batch["image_meta_dict"]["filename_or_obj"][0].split("/")[-1].split("_")[1]
-            img_name = "BraTS2023_" + num + ".nii.gz"
+            num = '-'.join(batch["image_meta_dict"]["filename_or_obj"][0].split("/")[-1].split("/")[-1].split("-")[2:4])
+            img_name = "BraTS2023-" + num + ".nii.gz"
             print("Inference on case {}".format(img_name))
+            # break
             prob = torch.sigmoid(model_inferer_test(image))
             seg = prob[0].detach().cpu().numpy()
             seg = (seg > 0.5).astype(np.int8)

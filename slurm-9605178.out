@@ -1,0 +1,18 @@
+usage: test.py [-h] [--data_dir DATA_DIR] [--exp_name EXP_NAME]
+               [--json_list JSON_LIST] [--fold FOLD]
+               [--pretrained_model_name PRETRAINED_MODEL_NAME]
+               [--feature_size FEATURE_SIZE] [--infer_overlap INFER_OVERLAP]
+               [--in_channels IN_CHANNELS] [--out_channels OUT_CHANNELS]
+               [--a_min A_MIN] [--a_max A_MAX] [--b_min B_MIN] [--b_max B_MAX]
+               [--space_x SPACE_X] [--space_y SPACE_Y] [--space_z SPACE_Z]
+               [--roi_x ROI_X] [--roi_y ROI_Y] [--roi_z ROI_Z]
+               [--dropout_rate DROPOUT_RATE] [--distributed]
+               [--workers WORKERS] [--RandFlipd_prob RANDFLIPD_PROB]
+               [--RandRotate90d_prob RANDROTATE90D_PROB]
+               [--RandScaleIntensityd_prob RANDSCALEINTENSITYD_PROB]
+               [--RandShiftIntensityd_prob RANDSHIFTINTENSITYD_PROB]
+               [--spatial_dims SPATIAL_DIMS] [--use_checkpoint]
+               [--pretrained_dir PRETRAINED_DIR]
+test.py: error: unrecognized arguments:  
+/var/spool/slurmd/job9605178/slurm_script: line 18: --data_dir=/scratch/guest183/BraTS_Africa_data/: No such file or directory
+/var/spool/slurmd/job9605178/slurm_script: line 22: --pretrained_model_name=model_final.pt: command not found
