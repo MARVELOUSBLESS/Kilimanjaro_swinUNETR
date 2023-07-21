@@ -13,9 +13,6 @@ from monai.networks.nets import SwinUNETR
 import subprocess
 import sys
 
-
-
-
 def _test_save_image_png():
     # to test save_image_png
     path_2_img = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00387-000/BraTS-GLI-00387-000-seg.nii.gz"
@@ -38,7 +35,9 @@ def load_1_nifti(path_2_img):
     return nib.load(path_2_img).get_fdata()
 
 def load_model(path_2_model:str, model_shape:dict):
-    r""" Given the path to a Swin UNETR model that has been previously trained, this function generates a new model 
+    r""" NOT NEEDED use test.py to generate model prediction as nifti files. 
+    
+    Given the path to a Swin UNETR model that has been previously trained, this function generates a new model 
         and transfers the state of the trained model to the new model. It then returns the new model.
 
     inputs:
@@ -107,17 +106,29 @@ def load_patient_to_tensor(path_2_patient:str):
             label = patient_tensors[key]
         
 
-    
+def match_prediction_name(dir_predictions:str):
+
+    prediction_dir_list = glob(dir_predictions+'*.nii.gz')
+
+    for old_pred_path in prediction_dir_list:
+        os.rename(old_pred_path, dir_predictions+"BraTS-GLI-"+"-".join(os.path.basename(old_pred_path).split(".")[0].split("-")[1:3])+"-seg.nii.gz")
+
+    # patient_number_list = ["BraTS-GLI-"+"-".join(os.path.basename(path_2_prediction).split(".")[0].split("-")[1:3])+"-seg.nii.gz" for path_2_prediction in glob(dir_predictions+'*.nii.gz')]
+    # print(patient_number_list)
+
 
 def main():
     # _test_save_image_png()      # test passed
-    _test_load_patient_to_tensor()
+    # _test_load_patient_to_tensor()
 
     path_patient="/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00387-000/"
-    path_model='/home/guest183/research-contributions/SwinUNETR/BRATS21/runs/4_gpu_4_epochs/model_final.pt'
+    path_predictions="/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/"
+    # path_model='/home/guest183/research-contributions/SwinUNETR/BRATS21/runs/4_gpu_4_epochs/model_final.pt'
 
-        
-    # give the patient path to dataloader, then test the model on the loaded patient data
+    match_prediction_name(path_predictions)
+    # screen shot at a specific z index for prediction, ground truth, and all the MRI images
+    # subtract prediction from ground truth
+    # save the result for that patient
 
 
 
