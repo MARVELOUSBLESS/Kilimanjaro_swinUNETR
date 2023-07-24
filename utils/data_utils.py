@@ -110,6 +110,7 @@ def get_loader(args):
             transforms.NormalizeIntensityd(keys="image", nonzero=True, channel_wise=True),
             transforms.RandScaleIntensityd(keys="image", factors=0.1, prob=1.0),
             transforms.RandShiftIntensityd(keys="image", offsets=0.1, prob=1.0),
+            # add new data transformations here!
             transforms.ToTensord(keys=["image", "label"]),
         ]
     )
