@@ -2,11 +2,11 @@
 #SBATCH --account=def-training-wa
 # SBATCH --reservation hackathon-wr-gpu
 #SBATCH --nodes=1
-#SBATCH --gpus-per-node=v100:8
+#SBATCH --gpus-per-node=t4:4
 # SBATCH --constraint=cascade,v100
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=128G
-#SBATCH --time=12:00:00
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=64G
+#SBATCH --time=7:00:00
 module load python/3.9
 source /home/guest183/run_swinUNETR_kilimanjaro/SWIN_ENV/bin/activate
 # to solve the monai resolve_mode error 
@@ -26,7 +26,7 @@ path_data='/scratch/guest183/BraTS_Africa_data/'
 # code to run the main method of the SWIN UNER network
 # echo $path_swin'main.py'
 # to train on multiple GPU
-python $path_swin'main.py' --distributed --lrschedule='cosine_anneal' --json_list=$path_swin'jsons/brats23_africa_folds.json' --sw_batch_size=8 --batch_size=2 --data_dir=$path_data --val_every=20 --infer_overlap=0.7 --in_channels=4 --spatial_dims=3 --save_checkpoint --use_checkpoint --feature_size=48 --max_epochs=200 --logdir='epoch_200_gpu_v100_16GB'
+python $path_swin'main.py' --distributed --lrschedule='cosine_anneal' --json_list=$path_swin'jsons/brats23_africa_folds.json' --sw_batch_size=8 --batch_size=2 --data_dir=$path_data --val_every=20 --infer_overlap=0.7 --out_channels=3 --in_channels=4 --spatial_dims=3 --save_checkpoint --use_checkpoint --feature_size=48 --max_epochs=60 --logdir='epoch_60_gpu_8v100_correctedLabels'
 
 # --resume_ckpt --pretrained_dir=$path_swin'runs/4_gpu_60_epochs/' --pretrained_model_name='model_final.pt'
 # 

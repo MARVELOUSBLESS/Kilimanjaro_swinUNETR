@@ -106,7 +106,7 @@ def main():
             seg_out = np.zeros((seg.shape[1], seg.shape[2], seg.shape[3]))
             seg_out[seg[1] == 1] = 2
             seg_out[seg[0] == 1] = 1
-            seg_out[seg[2] == 1] = 4
+            seg_out[seg[2] == 1] = 3
             nib.save(nib.Nifti1Image(seg_out.astype(np.uint8), affine), os.path.join(output_directory, img_name))
         print("Finished inference!")
 
