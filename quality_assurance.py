@@ -1,6 +1,6 @@
 # libraries to load nifti images and save them
 import os
-import  nibabel as nib
+# import  nibabel as nib
 import numpy as np
 import matplotlib
 from glob import glob
@@ -10,8 +10,16 @@ import torch
 from monai.networks.nets import SwinUNETR
 
 # libraries to call another python scritp 
-import subprocess
-import sys
+# import subprocess
+# import sys
+
+# dataloader library to be debugged
+from utils.data_utils import get_loader
+import argparse
+
+# to simulate the distributed multi-gpu envionment
+import torch.distributed as dist
+
 
 def _test_save_image_png():
     # to test save_image_png
@@ -50,7 +58,7 @@ def load_model(path_2_model:str, model_shape:dict):
     """
     # initialize an empty model
     model = SwinUNETR(
-        img_size=128,
+        img_size=96,
         in_channels=model_shape.in_channels,
         out_channels=model_shape.out_channels,
         feature_size=model_shape.feature_size,
@@ -178,6 +186,49 @@ def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, ou
         compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, slice_number)
 
 
+def test_get_loader():
+    r''' this function tests the get_loader function in Brats21 SwinUnetr/utils/data_utils.py/get_loader(). 
+    inputs:
+        - data_dir:str := path to the input data directory
+        - datalist_json :json := path to the json dictionary with the path of each input data in each training fold
+        -   
+    
+    '''
+    path_data = '/home/odcus/Data/BraTS_Africa_data/'
+    path_json = './jsons/brats23_africa_folds.json'
+    # test_args = {'data_dir': path_data, 'json_list': path_json,
+    #             'fold': 0, 'roi_x': 96, 'roi_y': 96, 'roi_z': 96,
+    #             'test_mode': False, 'distributed': True, 'workers': 8,
+    #             'batch_size': 1, 
+    #              } 
+    test_args = argparse.Namespace()
+    test_args.data_dir = path_data
+    test_args.json_list = path_json
+    test_args.fold = 0
+    test_args.roi_x = 96
+    test_args.roi_y = 96
+    test_args.roi_z = 96
+    test_args.test_mode = False
+    test_args.distributed = False
+    test_args.workers = 8
+    test_args.batch_size = 1
+
+    loader = get_loader(test_args)
+    train_loader = loader[0]
+    val_loader = loader[1]
+
+
+    for idx, batch_data in enumerate(train_loader):
+        # print(idx, batch_data.data.numpy().flatten().tolist())        # if isinstance(batch_data, list):
+        data, target = batch_data["image"], batch_data["label"]
+        
+        print('put breaking point here to see data and target')
+        # data, target = data.cuda(1), target.cuda(1)
+
+    return 0
+
+
+
 def main():
     # _test_save_image_png()      # test passed
     # _test_load_patient_to_tensor()   
@@ -189,9 +240,11 @@ def main():
     # path_model='/home/guest183/research-contributions/SwinUNETR/BRATS21/runs/4_gpu_4_epochs/model_final.pt'
 
     # compare all the predictions against ground truth at depth 100. 
-    qa_all_predictions(path_predictions, path_brats, out_dir, 100)
+    # qa_all_predictions(path_predictions, path_brats, out_dir, 100)
 
     # match_prediction_name(path_predictions)
+
+    test_get_loader()
 
 
  # DO NOT DELETE
