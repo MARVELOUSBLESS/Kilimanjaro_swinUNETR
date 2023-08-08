@@ -1,9 +1,10 @@
 # libraries to load nifti images and save them
 import os
-# import  nibabel as nib
+import  nibabel as nib
 import numpy as np
 import matplotlib
 from glob import glob
+import pandas as pd
 
 # libararies to load the model:
 import torch
@@ -17,8 +18,12 @@ from monai.networks.nets import SwinUNETR
 from utils.data_utils import get_loader
 import argparse
 
+# libarary hosting the brats multi channel transoformation
+from monai.transforms.utility.array import ConvertToMultiChannelBasedOnBratsClasses
+
 # to simulate the distributed multi-gpu envionment
-import torch.distributed as dist
+# import torch.distributed as dist
+
 
 
 def _test_save_image_png():
@@ -38,7 +43,7 @@ def save_image_png(img:np.array,slice_number:int,outname:str):
     matplotlib.image.imsave(outname, slice)
     # matplotlib.image.imsave('./qa_output/'+os.path.basename(path_2_img).split(".")[0]+".png", slice)
 
-def load_1_nifti(path_2_img):
+def load_1_nifti(path_2_img) -> np.array:
     r"""Load the image using nibabel and return it as a numpy array"""
     return nib.load(path_2_img).get_fdata()
 
@@ -186,6 +191,20 @@ def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, ou
         compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, slice_number)
 
 
+def intersection_ratio(pred:torch.Tensor, ground_truth:torch.Tensor) -> float:
+    r''' take the inserection between two boolean tensors and 
+    devide by the number of True enteries in the ground truth
+
+    '''
+    intersection = pred * ground_truth
+    ratio = np.sum(intersection==True) / np.sum(ground_truth==True)
+    return ratio
+
+def convert_label_to_multiChannel():
+   
+
+    return 0
+
 def test_get_loader():
     r''' this function tests the get_loader function in Brats21 SwinUnetr/utils/data_utils.py/get_loader(). 
     inputs:
@@ -213,18 +232,55 @@ def test_get_loader():
     test_args.workers = 8
     test_args.batch_size = 1
 
+    # call the get_loader on the arguments
     loader = get_loader(test_args)
     train_loader = loader[0]
     val_loader = loader[1]
 
+    test_results_tensor = torch.zeros([train_loader.sampler.num_samples, 12])
 
     for idx, batch_data in enumerate(train_loader):
         # print(idx, batch_data.data.numpy().flatten().tolist())        # if isinstance(batch_data, list):
-        data, target = batch_data["image"], batch_data["label"]
-        
-        print('put breaking point here to see data and target')
-        # data, target = data.cuda(1), target.cuda(1)
 
+        # extract the image data and the label data from batch
+        data, target = batch_data["image"], batch_data["label"]
+        # extract the names of the image and label from the batch
+        image_dir = batch_data['image_meta_dict']['filename_or_obj']
+        label_dir = batch_data['label_meta_dict']['filename_or_obj'][0]
+        # seperate each channel
+        tumor_core = batch_data["label"][0][0]
+        whole_tumor = batch_data["label"][0][1]
+        enhancing_tumor = batch_data["label"][0][2]
+        # load the raw labels from file:
+        label_file_tensor = torch.Tensor(load_1_nifti(label_dir))
+        # seperate the raw channels
+        print("a breaking point was here")
+        
+        # check if there is non zero elements on any of the labels
+        print(f"number of non-zero voxels in tumor core from get_loader() is: \n {torch.count_nonzero(tumor_core).item()}")
+        print(f"number of non-zero voxels in whole tumor from get_loader() is: \n {torch.count_nonzero(whole_tumor).item()}")
+        print(f"number of non-zero voxels in enhancing tumor from get_loader() is: \n {torch.count_nonzero(enhancing_tumor).item()}")
+
+        test_results_tensor[idx] = [
+            # num voxels in 
+                # tumor core
+            torch.count_nonzero(tumor_core).item(),
+            torch.count_nonzero(label_file_tensor).item(),
+                # whole tumor
+            torch.count_nonzero(whole_tumor).item(),
+            torch.count_nonzero(label_file_tensor).item(),
+                # enhancing tumor
+            torch.count_nonzero(enhancing_tumor).item(),
+            torch.count_nonzero(label_file_tensor).item(),
+
+            # intersection ratio
+            # intersection_ratio()
+
+        ]
+    columns = pd.MultiIndex.from_product([['num voxels', 'intersection ratio'], ['TC', 'WT', 'ET'], ['transformed', 'raw']], names=['test', 'tumor subregion', 'source'])
+    
+    test_results_pd = pd.DataFrame(data=test_results_tensor, columns=columns)
+    
     return 0
 
 

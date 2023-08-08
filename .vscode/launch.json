@@ -18,8 +18,8 @@
                 // "MASTER_ADDR": "localhost",
                 // "MASTER_PORT": "54589"
             },
-            // "args":[]
-            "args":["--lrschedule", "cosine_anneal", "--json_list", "./jsons/brats23_africa_folds.json", "--sw_batch_size", "8", "--batch_size", "2", "--data_dir", "/home/odcus/Data/BraTS_Africa_data/", "--val_every", "10", "--infer_overlap", "0.7", "--out_channels", "3", "--in_channels", "4", "--spatial_dims", "3", "--save_checkpoint", "--use_checkpoint", "--feature_size", "48", "--max_epochs", "10", "--logdir", "local_epoch_10"]
+            "args":[]
+            // "args":["--lrschedule", "cosine_anneal", "--json_list", "./jsons/brats23_africa_folds.json", "--sw_batch_size", "8", "--batch_size", "2", "--data_dir", "/home/odcus/Data/BraTS_Africa_data/", "--val_every", "10", "--infer_overlap", "0.7", "--out_channels", "3", "--in_channels", "4", "--spatial_dims", "3", "--save_checkpoint", "--use_checkpoint", "--feature_size", "48", "--max_epochs", "10", "--logdir", "local_epoch_10"]
         }
     ]
 }
