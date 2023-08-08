@@ -254,14 +254,14 @@ def test_get_loader():
         # load the raw labels from file:
         label_file_tensor = torch.Tensor(load_1_nifti(label_dir))
         # seperate the raw channels
-        print("a breaking point was here")
+        # print("a breaking point was here")
         
-        # check if there is non zero elements on any of the labels
-        print(f"number of non-zero voxels in tumor core from get_loader() is: \n {torch.count_nonzero(tumor_core).item()}")
-        print(f"number of non-zero voxels in whole tumor from get_loader() is: \n {torch.count_nonzero(whole_tumor).item()}")
-        print(f"number of non-zero voxels in enhancing tumor from get_loader() is: \n {torch.count_nonzero(enhancing_tumor).item()}")
+        # # check if there is non zero elements on any of the labels
+        # print(f"number of non-zero voxels in tumor core from get_loader() is: \n {torch.count_nonzero(tumor_core).item()}")
+        # print(f"number of non-zero voxels in whole tumor from get_loader() is: \n {torch.count_nonzero(whole_tumor).item()}")
+        # print(f"number of non-zero voxels in enhancing tumor from get_loader() is: \n {torch.count_nonzero(enhancing_tumor).item()}")
 
-        test_results_tensor[idx] = [
+        test_results_tensor[idx] = torch.Tensor([
             # num voxels in 
                 # tumor core
             torch.count_nonzero(tumor_core).item(),
@@ -272,11 +272,12 @@ def test_get_loader():
                 # enhancing tumor
             torch.count_nonzero(enhancing_tumor).item(),
             torch.count_nonzero(label_file_tensor).item(),
+            0,0,0,0,0,0
 
             # intersection ratio
             # intersection_ratio()
 
-        ]
+        ])
     columns = pd.MultiIndex.from_product([['num voxels', 'intersection ratio'], ['TC', 'WT', 'ET'], ['transformed', 'raw']], names=['test', 'tumor subregion', 'source'])
     
     test_results_pd = pd.DataFrame(data=test_results_tensor, columns=columns)
