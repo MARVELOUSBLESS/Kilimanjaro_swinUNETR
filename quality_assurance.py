@@ -237,7 +237,7 @@ def test_get_loader():
     train_loader = loader[0]
     val_loader = loader[1]
 
-    test_results_tensor = torch.zeros([train_loader.sampler.num_samples, 12])
+    test_results_tensor = torch.zeros([train_loader.sampler.num_samples, 6])
 
     for idx, batch_data in enumerate(train_loader):
         # print(idx, batch_data.data.numpy().flatten().tolist())        # if isinstance(batch_data, list):
@@ -265,23 +265,26 @@ def test_get_loader():
             # num voxels in 
                 # tumor core
             torch.count_nonzero(tumor_core).item(),
-            torch.count_nonzero(label_file_tensor).item(),
+            torch.sum(label_file_tensor==1.).item(),
                 # whole tumor
             torch.count_nonzero(whole_tumor).item(),
-            torch.count_nonzero(label_file_tensor).item(),
+            torch.sum(label_file_tensor==2.).item(),
                 # enhancing tumor
             torch.count_nonzero(enhancing_tumor).item(),
-            torch.count_nonzero(label_file_tensor).item(),
-            0,0,0,0,0,0
+            torch.sum(label_file_tensor==3.).item(),
 
             # intersection ratio
             # intersection_ratio()
 
         ])
-    columns = pd.MultiIndex.from_product([['num voxels', 'intersection ratio'], ['TC', 'WT', 'ET'], ['transformed', 'raw']], names=['test', 'tumor subregion', 'source'])
+        # print("a breaking point was here")
+
+    columns = pd.MultiIndex.from_product([['num voxels'], ['TC', 'WT', 'ET'], ['transformed', 'raw']], names=['test', 'tumor subregion', 'source'])
+    # in the future, we will add the intersection ratio test as well as the result of the dice score to the tests. 
+    # columns = pd.MultiIndex.from_product([['num voxels', 'intersection ratio'], ['TC', 'WT', 'ET'], ['transformed', 'raw']], names=['test', 'tumor subregion', 'source'])
     
     test_results_pd = pd.DataFrame(data=test_results_tensor, columns=columns)
-    
+    test_results_pd.to_csv("./qa_output/results_get_loader_afterFix.csv")
     return 0
 
 
