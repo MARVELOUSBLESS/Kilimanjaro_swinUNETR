@@ -253,14 +253,8 @@ def test_get_loader():
         enhancing_tumor = batch_data["label"][0][2]
         # load the raw labels from file:
         label_file_tensor = torch.Tensor(load_1_nifti(label_dir))
-        # seperate the raw channels
         # print("a breaking point was here")
-        
-        # # check if there is non zero elements on any of the labels
-        # print(f"number of non-zero voxels in tumor core from get_loader() is: \n {torch.count_nonzero(tumor_core).item()}")
-        # print(f"number of non-zero voxels in whole tumor from get_loader() is: \n {torch.count_nonzero(whole_tumor).item()}")
-        # print(f"number of non-zero voxels in enhancing tumor from get_loader() is: \n {torch.count_nonzero(enhancing_tumor).item()}")
-
+    
         test_results_tensor[idx] = torch.Tensor([
             # num voxels in 
                 # tumor core
@@ -272,10 +266,8 @@ def test_get_loader():
                 # enhancing tumor
             torch.count_nonzero(enhancing_tumor).item(),
             torch.sum(label_file_tensor==3.).item(),
-
             # intersection ratio
             # intersection_ratio()
-
         ])
         # print("a breaking point was here")
 
