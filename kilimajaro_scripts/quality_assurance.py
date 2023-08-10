@@ -3,6 +3,7 @@ import os
 import  nibabel as nib
 import numpy as np
 import matplotlib
+import matplotlib.pyplot as plt
 from glob import glob
 import pandas as pd
 
@@ -38,7 +39,7 @@ def _test_save_image_png():
 def save_image_png(img:np.array,slice_number:int,outname:str):
     r'''given a 3D numpy array, it will save a slice as a png image'''
     # Access the image data and display it
-    slice = img[:, :,img.shape[2] // 2]
+    # slice = img[:, :,img.shape[2] // 2]
     slice = img[:, :,slice_number]
     matplotlib.image.imsave(outname, slice)
     # matplotlib.image.imsave('./qa_output/'+os.path.basename(path_2_img).split(".")[0]+".png", slice)
@@ -120,21 +121,27 @@ def load_patient_to_tensor(path_2_patient:str):
         
 
 def match_prediction_name(dir_predictions:str):
+    r'''Not needed anymore after updating the name of the predicted labels'''
 
     prediction_dir_list = glob(dir_predictions+'*.nii.gz')
 
     for old_pred_path in prediction_dir_list:
-        os.rename(old_pred_path, dir_predictions+"BraTS-GLI-"+"-".join(os.path.basename(old_pred_path).split(".")[0].split("-")[1:3])+"-seg.nii.gz")
-
+            os.rename(old_pred_path, dir_predictions+"BraTS-GLI-"+"-".join(os.path.basename(old_pred_path).split(".")[0].split("-")[1:3])+"-seg.nii.gz")
     # patient_number_list = ["BraTS-GLI-"+"-".join(os.path.basename(path_2_prediction).split(".")[0].split("-")[1:3])+"-seg.nii.gz" for path_2_prediction in glob(dir_predictions+'*.nii.gz')]
     # print(patient_number_list)
 
 
 def _test_compare_pred_and_groundTruth():
-    path_pred = "/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/BraTS-GLI-00085-000-seg.nii.gz"
-    path_groundTruth = '/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00085-000/BraTS-GLI-00085-000-seg.nii.gz'
-    out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
-    compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir)
+    # # For local computer
+    path_pred = "/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/4gpu_120_epoch/BraTS-GLI-00085-000-seg.nii.gz"
+    path_groundTruth = '/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00085-000/BraTS-GLI-00085-000-seg.nii.gz'
+    out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/"
+
+    # # For Compute Canada
+    # path_pred = "/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/BraTS-GLI-00085-000-seg.nii.gz"
+    # path_groundTruth = '/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00085-000/BraTS-GLI-00085-000-seg.nii.gz'
+    # out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
+    compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, 120)
 
 
 def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:str, slice_number:int):
@@ -153,8 +160,12 @@ def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:st
     assert os.path.basename(path_pred) == os.path.basename(path_groundTruth)
 
     patient_number = "BraTS-GLI-" + "-".join(os.path.basename(path_pred).split("-")[2:4])
+    path_t2f = path_groundTruth.split("-")[:-1]
+    path_t2f.append('t2f.nii.gz')
+    path_t2f = "-".join(path_t2f)
 
-    # load prediction, ground truth and subtract them
+    # load patient t2 scan, prediction, ground truth and subtract them
+    patient_t2f = load_1_nifti(path_t2f)
     pred = load_1_nifti(path_pred)
     groundTruth=load_1_nifti(path_groundTruth)
     difference = pred-groundTruth
@@ -163,10 +174,23 @@ def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:st
     if not os.path.exists(out_dir+patient_number):
         os.mkdir(out_dir+patient_number)
 
-    # save all the matricies
-    save_image_png(pred, slice_number, out_dir+patient_number +"/" + patient_number +"-seg-prediction.png")
-    save_image_png(groundTruth, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-groundTruth.png")
-    save_image_png(difference, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-difference.png")
+    # make a subplot with the t2f image, ground truth, prediction and difference
+    # assert if slice number is not out of bound of the image slice range
+    assert slice_number>=0 and slice_number<pred.shape[-1]
+
+    fig, axes = plt.subplots(1, 4)
+    axes[0].imshow(patient_t2f[:, :, slice_number], cmap='gray')    
+    axes[1].imshow(groundTruth[:, :, slice_number], cmap='gray')
+    axes[2].imshow(pred[:, :, slice_number], cmap='gray')
+    axes[3].imshow(difference[:, :, slice_number], cmap='gray')
+    plt.show()
+    plt.savefig(out_dir+patient_number +"/" + patient_number + "college.png")    
+
+    # # save all the matricies
+    # save_image_png(pred, slice_number, out_dir+patient_number +"/" + patient_number +"-seg-prediction.png")
+    # save_image_png(groundTruth, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-groundTruth.png")
+    # save_image_png(difference, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-difference.png")
+    
 
 def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, out_dir, slice_number:int):
     r""" given a directory full of predictions, this function will find the ground truth file for each prediction and compares
@@ -284,7 +308,9 @@ def test_get_loader():
 def main():
     # _test_save_image_png()      # test passed
     # _test_load_patient_to_tensor()   
-    # _test_compare_pred_and_groundTruth()
+    _test_compare_pred_and_groundTruth()
+    # test_get_loader() # test passed
+
 
     path_brats="/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
     path_predictions="/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/"
@@ -296,7 +322,6 @@ def main():
 
     # match_prediction_name(path_predictions)
 
-    test_get_loader()
 
 
  # DO NOT DELETE
