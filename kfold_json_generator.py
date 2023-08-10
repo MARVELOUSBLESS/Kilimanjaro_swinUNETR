@@ -71,11 +71,21 @@ def main():
     # kfold_dict_gli_training:dict = kfold_data_dict(data_dir_gli_training, 5, out_json_file="brats23_africa_folds.json")
 
     # generate json for GLI validation folder
-    data_dir_GLI_val:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
-    json_outdir:str = "./jsons/brats23_gli_test.json"
-    kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_GLI_val, 1, "testing", json_outdir)
+    # data_dir_GLI_val:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
+    # json_outdir:str = "./jsons/brats23_gli_test.json"
+    # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_GLI_val, 1, "testing", json_outdir)
 
-    # Generate json file for sub saharan africa data
+    # # Generate json file for sub saharan africa data
+    # # Training set
+    data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
+    json_outdir:str = "./jsons/brats23_ssa_train.json"
+    kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 5, "testing", json_outdir)
+
+    # # testing set
+    data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
+    json_outdir:str = "./jsons/brats23_ssa_train.json"
+    kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 5, "testing", json_outdir)
+
 
     
 

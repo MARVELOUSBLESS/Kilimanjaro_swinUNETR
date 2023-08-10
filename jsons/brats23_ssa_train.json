@@ -1,0 +1,364 @@
+{
+    "training": [
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00028-000/BraTS-SSA-00028-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00028-000/BraTS-SSA-00028-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00028-000/BraTS-SSA-00028-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00028-000/BraTS-SSA-00028-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00008-000/BraTS-SSA-00008-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00008-000/BraTS-SSA-00008-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00008-000/BraTS-SSA-00008-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00008-000/BraTS-SSA-00008-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00002-000/BraTS-SSA-00002-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00002-000/BraTS-SSA-00002-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00002-000/BraTS-SSA-00002-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00002-000/BraTS-SSA-00002-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00120-000/BraTS-SSA-00120-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00120-000/BraTS-SSA-00120-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00120-000/BraTS-SSA-00120-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00120-000/BraTS-SSA-00120-000-t1n.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00110-000/BraTS-SSA-00110-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00110-000/BraTS-SSA-00110-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00110-000/BraTS-SSA-00110-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00110-000/BraTS-SSA-00110-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00068-000/BraTS-SSA-00068-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00068-000/BraTS-SSA-00068-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00068-000/BraTS-SSA-00068-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00068-000/BraTS-SSA-00068-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00046-000/BraTS-SSA-00046-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00046-000/BraTS-SSA-00046-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00046-000/BraTS-SSA-00046-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00046-000/BraTS-SSA-00046-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00121-000/BraTS-SSA-00121-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00121-000/BraTS-SSA-00121-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00121-000/BraTS-SSA-00121-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00121-000/BraTS-SSA-00121-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00074-000/BraTS-SSA-00074-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00074-000/BraTS-SSA-00074-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00074-000/BraTS-SSA-00074-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00074-000/BraTS-SSA-00074-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00010-000/BraTS-SSA-00010-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00010-000/BraTS-SSA-00010-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00010-000/BraTS-SSA-00010-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00010-000/BraTS-SSA-00010-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00056-000/BraTS-SSA-00056-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00056-000/BraTS-SSA-00056-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00056-000/BraTS-SSA-00056-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00056-000/BraTS-SSA-00056-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00117-000/BraTS-SSA-00117-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00117-000/BraTS-SSA-00117-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00117-000/BraTS-SSA-00117-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00117-000/BraTS-SSA-00117-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00093-000/BraTS-SSA-00093-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00093-000/BraTS-SSA-00093-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00093-000/BraTS-SSA-00093-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00093-000/BraTS-SSA-00093-000-t1n.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00014-000/BraTS-SSA-00014-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00014-000/BraTS-SSA-00014-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00014-000/BraTS-SSA-00014-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00014-000/BraTS-SSA-00014-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00007-000/BraTS-SSA-00007-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00007-000/BraTS-SSA-00007-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00007-000/BraTS-SSA-00007-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00007-000/BraTS-SSA-00007-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 1,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00051-000/BraTS-SSA-00051-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00051-000/BraTS-SSA-00051-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00051-000/BraTS-SSA-00051-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00051-000/BraTS-SSA-00051-000-t1n.nii.gz"
+            ]
+        },
+        {
+            "fold": 2,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00116-000/BraTS-SSA-00116-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00116-000/BraTS-SSA-00116-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00116-000/BraTS-SSA-00116-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00116-000/BraTS-SSA-00116-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 2,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00012-000/BraTS-SSA-00012-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00012-000/BraTS-SSA-00012-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00012-000/BraTS-SSA-00012-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00012-000/BraTS-SSA-00012-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 2,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00081-000/BraTS-SSA-00081-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00081-000/BraTS-SSA-00081-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00081-000/BraTS-SSA-00081-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00081-000/BraTS-SSA-00081-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 2,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00113-000/BraTS-SSA-00113-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00113-000/BraTS-SSA-00113-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00113-000/BraTS-SSA-00113-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00113-000/BraTS-SSA-00113-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 2,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00112-000/BraTS-SSA-00112-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00112-000/BraTS-SSA-00112-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00112-000/BraTS-SSA-00112-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00112-000/BraTS-SSA-00112-000-t1n.nii.gz"
+            ]
+        },
+        {
+            "fold": 2,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00049-000/BraTS-SSA-00049-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00049-000/BraTS-SSA-00049-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00049-000/BraTS-SSA-00049-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00049-000/BraTS-SSA-00049-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 2,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00015-000/BraTS-SSA-00015-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00015-000/BraTS-SSA-00015-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00015-000/BraTS-SSA-00015-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00015-000/BraTS-SSA-00015-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 2,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00122-000/BraTS-SSA-00122-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00122-000/BraTS-SSA-00122-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00122-000/BraTS-SSA-00122-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00122-000/BraTS-SSA-00122-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 3,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00057-000/BraTS-SSA-00057-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00057-000/BraTS-SSA-00057-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00057-000/BraTS-SSA-00057-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00057-000/BraTS-SSA-00057-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 3,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00047-000/BraTS-SSA-00047-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00047-000/BraTS-SSA-00047-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00047-000/BraTS-SSA-00047-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00047-000/BraTS-SSA-00047-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 3,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00011-000/BraTS-SSA-00011-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00011-000/BraTS-SSA-00011-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00011-000/BraTS-SSA-00011-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00011-000/BraTS-SSA-00011-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 3,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00025-000/BraTS-SSA-00025-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00025-000/BraTS-SSA-00025-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00025-000/BraTS-SSA-00025-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00025-000/BraTS-SSA-00025-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 3,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00076-000/BraTS-SSA-00076-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00076-000/BraTS-SSA-00076-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00076-000/BraTS-SSA-00076-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00076-000/BraTS-SSA-00076-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 3,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00119-000/BraTS-SSA-00119-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00119-000/BraTS-SSA-00119-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00119-000/BraTS-SSA-00119-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00119-000/BraTS-SSA-00119-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 3,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00044-000/BraTS-SSA-00044-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00044-000/BraTS-SSA-00044-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00044-000/BraTS-SSA-00044-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00044-000/BraTS-SSA-00044-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 3,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00078-000/BraTS-SSA-00078-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00078-000/BraTS-SSA-00078-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00078-000/BraTS-SSA-00078-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00078-000/BraTS-SSA-00078-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 4,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00095-000/BraTS-SSA-00095-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00095-000/BraTS-SSA-00095-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00095-000/BraTS-SSA-00095-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00095-000/BraTS-SSA-00095-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 4,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00026-000/BraTS-SSA-00026-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00026-000/BraTS-SSA-00026-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00026-000/BraTS-SSA-00026-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00026-000/BraTS-SSA-00026-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 4,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00097-000/BraTS-SSA-00097-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00097-000/BraTS-SSA-00097-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00097-000/BraTS-SSA-00097-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00097-000/BraTS-SSA-00097-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 4,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00092-000/BraTS-SSA-00092-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00092-000/BraTS-SSA-00092-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00092-000/BraTS-SSA-00092-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00092-000/BraTS-SSA-00092-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 4,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00115-000/BraTS-SSA-00115-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00115-000/BraTS-SSA-00115-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00115-000/BraTS-SSA-00115-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00115-000/BraTS-SSA-00115-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 4,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00055-000/BraTS-SSA-00055-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00055-000/BraTS-SSA-00055-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00055-000/BraTS-SSA-00055-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00055-000/BraTS-SSA-00055-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 4,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00096-000/BraTS-SSA-00096-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00096-000/BraTS-SSA-00096-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00096-000/BraTS-SSA-00096-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00096-000/BraTS-SSA-00096-000-t1n.nii.gz"
+            ]
+        },
+        {
+            "fold": 4,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00050-000/BraTS-SSA-00050-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00050-000/BraTS-SSA-00050-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00050-000/BraTS-SSA-00050-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/BraTS-SSA-00050-000/BraTS-SSA-00050-000-t2w.nii.gz"
+            ]
+        }
+    ]
+}
