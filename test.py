@@ -38,9 +38,9 @@ parser.add_argument("--b_max", default=1.0, type=float, help="b_max in ScaleInte
 parser.add_argument("--space_x", default=1.5, type=float, help="spacing in x direction")
 parser.add_argument("--space_y", default=1.5, type=float, help="spacing in y direction")
 parser.add_argument("--space_z", default=2.0, type=float, help="spacing in z direction")
-parser.add_argument("--roi_x", default=128, type=int, help="roi size in x direction")
-parser.add_argument("--roi_y", default=128, type=int, help="roi size in y direction")
-parser.add_argument("--roi_z", default=128, type=int, help="roi size in z direction")
+parser.add_argument("--roi_x", default=96, type=int, help="roi size in x direction")
+parser.add_argument("--roi_y", default=96, type=int, help="roi size in y direction")
+parser.add_argument("--roi_z", default=96, type=int, help="roi size in z direction")
 parser.add_argument("--dropout_rate", default=0.0, type=float, help="dropout rate")
 parser.add_argument("--distributed", action="store_true", help="start distributed training")
 parser.add_argument("--workers", default=8, type=int, help="number of workers")
@@ -70,7 +70,7 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     pretrained_pth = os.path.join(pretrained_dir, model_name)
     model = SwinUNETR(
-        img_size=128,
+        img_size=96,
         in_channels=args.in_channels,
         out_channels=args.out_channels,
         feature_size=args.feature_size,

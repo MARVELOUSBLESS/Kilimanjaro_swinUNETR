@@ -13,7 +13,7 @@ def view_data_shape(path_2_img:str):
     
     return 0
 
-def kfold_data_dict(data_dir:str, num_folds:int):
+def kfold_data_dict(data_dir:str, num_folds:int, data_use:str, out_json_file:str=None):
     r''' Given a directory of images from BraTS challege, it will map the patient files and stores them in a dictionary
     inputs:
         - data_dir: path to the training data
@@ -31,7 +31,7 @@ def kfold_data_dict(data_dir:str, num_folds:int):
     # print(patient_dir)
 
     # Initialize the dictionary holding k fold cross validation
-    kfold_dict:dict = {"training":[]}
+    kfold_dict:dict = {data_use:[]}
     # figure out how many patients are in a fold
     num_patient_per_fold:int = int(len(patient_dir) / num_folds)
     # print(num_patient_per_fold)
@@ -44,11 +44,16 @@ def kfold_data_dict(data_dir:str, num_folds:int):
             # print()
             temp_dict = {'fold':k}
             temp_dict["image"] = glob(patient+"/*t*")
-            temp_dict["label"] = glob(patient+"/*seg*")[0]
-            kfold_dict["training"].append(temp_dict)
+            if data_use == "training":
+                temp_dict["label"] = glob(patient+"/*seg*")[0]
+            kfold_dict[data_use].append(temp_dict)
             # print(temp_dict)
             # break
         # break
+
+    if not (out_json_file is None): 
+        with open(out_json_file, 'w') as outfile:
+            json.dump(kfold_dict, outfile, indent=4)
 
     return kfold_dict
 
@@ -61,15 +66,18 @@ def main():
     # path_2_img = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00387-000/BraTS-GLI-00387-000-seg.nii.gz"
     # view_data_shape(path_2_img)
 
-    # generate json file containing the path to n fold cross validation data 
-    # get the number of folds
-    num_folds:int = 5
-    # get the path to the patient image folders
-    data_dir:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
-    kfold_dict:dict = kfold_data_dict(data_dir, num_folds)
-    # print(len(kfold_dict["training"]))
-    with open("brats23_africa_folds.json", 'w') as outfile:
-        json.dump(kfold_dict, outfile, indent=4)
+    # generate json file for GLI data containing the path to n fold cross validation data 
+    # data_dir_gli_training:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
+    # kfold_dict_gli_training:dict = kfold_data_dict(data_dir_gli_training, 5, out_json_file="brats23_africa_folds.json")
+
+    # generate json for GLI validation folder
+    data_dir_GLI_val:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
+    json_outdir:str = "./jsons/brats23_gli_test.json"
+    kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_GLI_val, 1, "testing", json_outdir)
+
+    # Generate json file for sub saharan africa data
+
+    
 
 # DO NOT DELETE
 if __name__ == "__main__":
