@@ -7,11 +7,10 @@
 #SBATCH --mem=32G
 #SBATCH --time=0:15:00
 
-module load python/3.9
-source /home/guest183/run_swinUNETR_kilimanjaro/SWIN_ENV/bin/activate
+source ./SWIN_ENV/bin/activate
 
-path_swin='/home/guest183/research-contributions/SwinUNETR/BRATS21/'
-path_data='/scratch/guest183/BraTS_Africa_data/'
+path_swin='/home/odcus/Software/Kilimanjaro_swinUNETR/'
+path_data='/home/odcus/Data/BraTS_Africa_data/'
 
 # # generate model predictions
 python $path_swin'test.py'  --infer_overlap=0.7\

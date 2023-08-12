@@ -1,4 +1,6 @@
 {
+    "training":[],
+    "validation":[],
     "testing": [
         {
             "fold": 0,
