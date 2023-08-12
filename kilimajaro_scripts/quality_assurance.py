@@ -143,6 +143,8 @@ def _test_compare_pred_and_groundTruth():
     # out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
     compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, 120)
 
+# def get_patient_number(label_path:"str") -> str:
+
 
 def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:str, slice_number:int):
     r""" this function takes a screen shot of the predicted segmentation from the model and the ground truth segmentation
@@ -192,7 +194,7 @@ def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:st
     # save_image_png(difference, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-difference.png")
     
 
-def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, out_dir, slice_number:int):
+def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, out_dir, slice_number:int, mode="training"):
     r""" given a directory full of predictions, this function will find the ground truth file for each prediction and compares
         the prediction with ground truth over all patients. 
     inputs:
@@ -207,12 +209,44 @@ def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, ou
     for path_pred in pred_all_paths:
         patient_number = "BraTS-GLI-" + "-".join(os.path.basename(path_pred).split("-")[2:4])
         path_groundTruth = dir_groundTruth_allPatients + patient_number + "/" + os.path.basename(path_pred)
-        # DEBUGGING{
+        # # DEBUGGING{
         # print(path_pred)
         # print(path_groundTruth)
         # break
-        # }
-        compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, slice_number)
+        # # }
+        if mode == "training":
+            compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, slice_number)
+        else:
+            dir_scan = path_groundTruth.split("seg")[0]+"t2f.nii.gz"
+            visualize_predictions(path_pred, dir_scan, out_dir, slice_number)
+
+
+def visualize_predictions(dir_pred_label: str, dir_scan: str, out_dir: str, slice_number:int):
+    r""" given the prediction label, if will generate a figure where the t2 flair scan and the segmentation are put next to each other
+    input:
+        - dir_pred_label := path to the label
+        - dir_scan := path to the patient t2 flair scan
+        - dir_out := path to the directory where the generated figure is stores
+        - slice_number := z slice at which the figure is generated
+    """
+    patient_number = "BraTS-GLI-" + "-".join(os.path.basename(dir_pred_label).split("-")[2:4])
+    # path_t2f = dir_scan.split("-")[:-1]
+    # path_t2f.append('t2f.nii.gz')
+    # path_t2f = "-".join(path_t2f)
+
+
+    # load the mask and t2 scan
+    pred = load_1_nifti(dir_pred_label)
+    t2f = load_1_nifti(dir_scan)
+
+    assert slice_number>=0 and slice_number<pred.shape[-1]
+
+    fig, axes = plt.subplots(1, 2)
+    axes[0].imshow(t2f[:, :, slice_number], cmap='gray')    
+    axes[1].imshow(pred[:, :, slice_number], cmap='gray')
+    plt.show()
+    plt.savefig(out_dir+patient_number +"/" + patient_number + "college.png")    
+
 
 
 def intersection_ratio(pred:torch.Tensor, ground_truth:torch.Tensor) -> float:
@@ -223,11 +257,6 @@ def intersection_ratio(pred:torch.Tensor, ground_truth:torch.Tensor) -> float:
     intersection = pred * ground_truth
     ratio = np.sum(intersection==True) / np.sum(ground_truth==True)
     return ratio
-
-def convert_label_to_multiChannel():
-   
-
-    return 0
 
 def test_get_loader():
     r''' this function tests the get_loader function in Brats21 SwinUnetr/utils/data_utils.py/get_loader(). 
@@ -308,17 +337,25 @@ def test_get_loader():
 def main():
     # _test_save_image_png()      # test passed
     # _test_load_patient_to_tensor()   
-    _test_compare_pred_and_groundTruth()
+    # _test_compare_pred_and_groundTruth()
     # test_get_loader() # test passed
 
+    # # on compute canada
+    # path_brats="/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
+    # path_predictions="/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/"
+    # out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
 
-    path_brats="/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
-    path_predictions="/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/"
-    out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
-    # path_model='/home/guest183/research-contributions/SwinUNETR/BRATS21/runs/4_gpu_4_epochs/model_final.pt'
+    # # on my local computer 
+    path_brats="/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
+    path_predictions="/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/"
+    out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/GLI_tests/"
 
-    # compare all the predictions against ground truth at depth 100. 
+
+    # # compare all the predictions against ground truth at depth 100. 
     # qa_all_predictions(path_predictions, path_brats, out_dir, 100)
+
+    # # qa test case outputs
+    qa_all_predictions(path_predictions, path_brats, out_dir, 100, mode="testing")
 
     # match_prediction_name(path_predictions)
 

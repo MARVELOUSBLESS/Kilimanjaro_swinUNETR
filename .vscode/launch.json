@@ -19,17 +19,17 @@
                 // "MASTER_ADDR": "localhost",
                 // "MASTER_PORT": "54589"
             },
-            // "args":[]
-            // for testing
-            "args":[
-                "--infer_overlap","0.7", 
-                "--data_dir", "/home/odcus/Data/BraTS_Africa_data/",
-                "--exp_name", "epoch100_baseModel_GLI_test",
-                "--json_list", "jsons/brats23_gli_test.json",
-                "--pretrained_dir", "/home/odcus/Software/Kilimanjaro_swinUNETR/pretrained_models/",
-                "--pretrained_model_name", "model-epoch100-baseModel-2023.pt"
-            ]
-            // for training
+            "args":[]
+            // for testing SWINUNETR model
+            // "args":[
+            //     "--infer_overlap","0.7", 
+            //     "--data_dir", "/home/odcus/Data/BraTS_Africa_data/",
+            //     "--exp_name", "epoch100_baseModel_GLI_test",
+            //     "--json_list", "jsons/brats23_gli_test.json",
+            //     "--pretrained_dir", "/home/odcus/Software/Kilimanjaro_swinUNETR/pretrained_models/",
+            //     "--pretrained_model_name", "model-epoch100-baseModel-2023.pt"
+            // ]
+            // for training SWINUNETR model
             // "args":[ "--pretrained_dir", "/home/odcus/Software/Kilimanjaro_swinUNETR/pretrained_models",
             //  "--pretrained_model_name", "model-epoch100-baseModel-2023.pt",
             //  "--resume_ckpt",
