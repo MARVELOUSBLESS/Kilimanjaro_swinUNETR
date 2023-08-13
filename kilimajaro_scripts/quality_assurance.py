@@ -219,6 +219,7 @@ def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, ou
         else:
             dir_scan = path_groundTruth.split("seg")[0]+"t2f.nii.gz"
             visualize_predictions(path_pred, dir_scan, out_dir, slice_number)
+            # break
 
 
 def visualize_predictions(dir_pred_label: str, dir_scan: str, out_dir: str, slice_number:int):
@@ -230,6 +231,9 @@ def visualize_predictions(dir_pred_label: str, dir_scan: str, out_dir: str, slic
         - slice_number := z slice at which the figure is generated
     """
     patient_number = "BraTS-GLI-" + "-".join(os.path.basename(dir_pred_label).split("-")[2:4])
+    # make patient folder in the out dir
+    if not os.path.exists(out_dir+patient_number):
+        os.mkdir(out_dir+patient_number)
     # path_t2f = dir_scan.split("-")[:-1]
     # path_t2f.append('t2f.nii.gz')
     # path_t2f = "-".join(path_t2f)
@@ -241,11 +245,12 @@ def visualize_predictions(dir_pred_label: str, dir_scan: str, out_dir: str, slic
 
     assert slice_number>=0 and slice_number<pred.shape[-1]
 
-    fig, axes = plt.subplots(1, 2)
-    axes[0].imshow(t2f[:, :, slice_number], cmap='gray')    
-    axes[1].imshow(pred[:, :, slice_number], cmap='gray')
-    plt.show()
-    plt.savefig(out_dir+patient_number +"/" + patient_number + "college.png")    
+    for slice in np.arange(0, pred.shape[-1], 10):
+        fig, axes = plt.subplots(1, 2)
+        axes[0].imshow(t2f[:, :, slice], cmap='gray')    
+        axes[1].imshow(pred[:, :, slice],)
+        # plt.show()
+        plt.savefig(out_dir+patient_number +"/" + patient_number + f"college_{slice}.png")    
 
 
 
@@ -348,14 +353,14 @@ def main():
     # # on my local computer 
     path_brats="/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
     path_predictions="/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/"
-    out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/GLI_tests/"
+    out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/GLI_tests/"
 
 
     # # compare all the predictions against ground truth at depth 100. 
     # qa_all_predictions(path_predictions, path_brats, out_dir, 100)
 
     # # qa test case outputs
-    qa_all_predictions(path_predictions, path_brats, out_dir, 100, mode="testing")
+    qa_all_predictions(path_predictions, path_brats, out_dir, 48, mode="testing")
 
     # match_prediction_name(path_predictions)
 
