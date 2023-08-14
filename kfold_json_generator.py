@@ -3,6 +3,7 @@ import json
 import random
 import  nibabel as nib
 import numpy as np
+import os
 
 
 def view_data_shape(path_2_img:str):
@@ -57,6 +58,34 @@ def kfold_data_dict(data_dir:str, num_folds:int, data_use:str, out_json_file:str
 
     return kfold_dict
 
+def remove_patient_from_json(dir_predFiles, dir_json):
+    files_to_be_removed = glob(dir_predFiles + "*.nii.gz")
+    with open(dir_json, 'r') as f:
+        dict_patients = json.load(f)
+
+    patient_number_list = []
+    for file in files_to_be_removed:
+        patient_number_list.append("-".join(os.path.basename(file).split("-")[2:4]))
+    patient_number_str = "_".join(patient_number_list)
+
+    # print(type(dict_patients))
+    # # remove patient from the json dictionary
+    new_testing_list = []
+    for data in dict_patients["testing"]:
+        # print("-".join(os.path.basename(data["image"][0]).split("-")[2:4]))
+        json_patient_number = "-".join(os.path.basename(data["image"][0]).split("-")[2:4])
+        if not json_patient_number in patient_number_str:
+            new_testing_list.append(data)
+    
+    # print(new_testing_list[0])
+
+    new_dict = {"testing": new_testing_list}
+    with open("jsons/brats23_gli_remainig_test.json", 'w') as outfile:
+            json.dump(new_dict, outfile, indent=4)
+
+
+
+
 def main():
 
     # check the shape of a single image or segmentation file. 
@@ -72,21 +101,22 @@ def main():
 
     # generate json for GLI validation folder
     # data_dir_GLI_val:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
-    # json_outdir:str = "./jsons/brats23_gli_test.json"
+    json_outdir:str = "./jsons/brats23_gli_test.json"
     # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_GLI_val, 1, "testing", json_outdir)
 
     # # Generate json file for sub saharan africa data
     # # Training set
-    data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
-    json_outdir:str = "./jsons/brats23_ssa_train.json"
-    kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 5, "testing", json_outdir)
+    # data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
+    # json_outdir:str = "./jsons/brats23_ssa_train.json"
+    # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 5, "testing", json_outdir)
 
-    # # testing set
-    data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
-    json_outdir:str = "./jsons/brats23_ssa_train.json"
-    kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 5, "testing", json_outdir)
+    # # # testing set
+    # data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
+    # json_outdir:str = "./jsons/brats23_ssa_train.json"
+    # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 5, "testing", json_outdir)
 
-
+    dir_with_test_labels = "/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/epoch100_baseModel_GLI_test/"
+    remove_patient_from_json(dir_with_test_labels, json_outdir)
     
 
 # DO NOT DELETE

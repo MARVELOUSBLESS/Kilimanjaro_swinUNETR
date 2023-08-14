@@ -2,3 +2,4 @@
 # *tfevents*
 # slurm-9153*
 SWIN_ENV
+outputs/epoch100_baseModel_GLI_test

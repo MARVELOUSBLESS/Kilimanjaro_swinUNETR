@@ -1,0 +1,34 @@
+Found total gpus 4
+2023-08-13 23:19:59,985 - Added key: store_based_barrier_key:1 to store for rank: 1
+2023-08-13 23:20:00,008 - Added key: store_based_barrier_key:1 to store for rank: 3
+2023-08-13 23:20:00,024 - Added key: store_based_barrier_key:1 to store for rank: 2
+2023-08-13 23:20:00,030 - Added key: store_based_barrier_key:1 to store for rank: 0
+2023-08-13 23:20:00,030 - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+2023-08-13 23:20:00,035 - Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+2023-08-13 23:20:00,037 - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+2023-08-13 23:20:00,039 - Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+Traceback (most recent call last):
+  File "/home/guest183/research-contributions/SwinUNETR/BRATS21/main.py", line 237, in <module>
+    main()
+  File "/home/guest183/research-contributions/SwinUNETR/BRATS21/main.py", line 105, in main
+    mp.spawn(main_worker, nprocs=args.ngpus_per_node, args=(args,))
+  File "/home/guest183/run_swinUNETR_kilimanjaro/SWIN_ENV/lib/python3.9/site-packages/torch/multiprocessing/spawn.py", line 240, in spawn
+    return start_processes(fn, args, nprocs, join, daemon, start_method='spawn')
+  File "/home/guest183/run_swinUNETR_kilimanjaro/SWIN_ENV/lib/python3.9/site-packages/torch/multiprocessing/spawn.py", line 198, in start_processes
+    while not context.join():
+  File "/home/guest183/run_swinUNETR_kilimanjaro/SWIN_ENV/lib/python3.9/site-packages/torch/multiprocessing/spawn.py", line 160, in join
+    raise ProcessRaisedException(msg, error_index, failed_process.pid)
+torch.multiprocessing.spawn.ProcessRaisedException: 
+
+-- Process 1 terminated with the following error:
+Traceback (most recent call last):
+  File "/home/guest183/run_swinUNETR_kilimanjaro/SWIN_ENV/lib/python3.9/site-packages/torch/multiprocessing/spawn.py", line 69, in _wrap
+    fn(i, *args)
+  File "/home/guest183/research-contributions/SwinUNETR/BRATS21/main.py", line 123, in main_worker
+    loader = get_loader(args)
+  File "/home/guest183/research-contributions/SwinUNETR/BRATS21/utils/data_utils.py", line 121, in get_loader
+    train_files, validation_files = datafold_read(datalist=datalist_json, basedir=data_dir, fold=args.fold)
+  File "/home/guest183/research-contributions/SwinUNETR/BRATS21/utils/data_utils.py", line 89, in datafold_read
+    json_data = json_data[key]
+KeyError: 'training'
+

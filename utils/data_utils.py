@@ -66,6 +66,22 @@ class Sampler(torch.utils.data.Sampler):
         self.epoch = epoch
 
 
+def _test_datafold_read():
+    r""" test the datafold_read for testing data that does not have labels. 
+    it works. tran_files are going to be an empty list, while the validation_files is list full of images and fold!
+    """
+    # test on remote cluster
+    data_dir = "/scratch/guest183/BraTS_Africa_data"
+    datalist_json = '/home/guest183/research-contributions/SwinUNETR/BRATS21/jsons/brats23_gli_test.json'
+    
+    # test on local computer
+    # data_dir = "/home/odcus/Data/BraTS_Africa_data/"
+    # datalist_json = '/home/odcus/Software/Kilimanjaro_swinUNETR/jsons/brats23_gli_test.json'
+    train_files, validation_files = datafold_read(datalist=datalist_json, basedir=data_dir, fold=0, key="testing")
+    # print("debugging with breaking point")
+    print(validation_files)
+    # print(train_files)
+
 def datafold_read(datalist, basedir, fold=0, key="training"):
     with open(datalist) as f:
         json_data = json.load(f)
@@ -82,18 +98,28 @@ def datafold_read(datalist, basedir, fold=0, key="training"):
     tr = []
     val = []
     for d in json_data:
-        if "fold" in d and d["fold"] == fold:
-            val.append(d)
-        else:
-            tr.append(d)
-
+        # if key == "training":
+            if "fold" in d and d["fold"] == fold:
+                val.append(d)
+            else:
+                tr.append(d)
+        # else:
+        #     val.append
+    
     return tr, val
+        
+
+
 
 
 def get_loader(args):
     data_dir = args.data_dir
     datalist_json = args.json_list
-    train_files, validation_files = datafold_read(datalist=datalist_json, basedir=data_dir, fold=args.fold)
+    if args.test_mode:
+        train_files, validation_files = datafold_read(datalist=datalist_json, basedir=data_dir, fold=args.fold, key="testing")
+    else:
+        train_files, validation_files = datafold_read(datalist=datalist_json, basedir=data_dir, fold=args.fold)
+    
     train_transform = transforms.Compose(
         [
             transforms.LoadImaged(keys=["image", "label"]),
@@ -123,12 +149,15 @@ def get_loader(args):
         ]
     )
 
+
     test_transform = transforms.Compose(
         [
-            transforms.LoadImaged(keys=["image", "label"]),
-            transforms.ConvertToMultiChannelBasedOnBratsClassesd(keys="label"),
+            transforms.LoadImaged(keys=["image"]),
+            # # test images are not supposed to have labels!
+            # transforms.LoadImaged(keys=["image", "label"]),
+            # transforms.ConvertToMultiChannelBasedOnBratsClassesd(keys="label"),
             transforms.NormalizeIntensityd(keys="image", nonzero=True, channel_wise=True),
-            transforms.ToTensord(keys=["image", "label"]),
+            transforms.ToTensord(keys=["image"]),
         ]
     )
 
@@ -160,3 +189,6 @@ def get_loader(args):
         loader = [train_loader, val_loader]
 
     return loader
+
+if __name__=="__main__":
+    _test_datafold_read()

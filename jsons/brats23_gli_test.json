@@ -1,5 +1,7 @@
 {
-    "training": [
+    "training":[],
+    "validation":[],
+    "testing": [
         {
             "fold": 0,
             "image": [
