@@ -360,10 +360,14 @@ def main():
     # qa_all_predictions(path_predictions, path_brats, out_dir, 100)
 
     # # qa test case outputs
-    qa_all_predictions(path_predictions, path_brats, out_dir, 48, mode="testing")
+    # qa_all_predictions(path_predictions, path_brats, out_dir, 48, mode="testing")
 
     # match_prediction_name(path_predictions)
 
+    # test pred label shape:
+    path_pred = "/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/BraTS-GLI-00560-001-seg.nii.gz"
+    pred = load_1_nifti(path_pred)
+    print(pred.shape)
 
 
  # DO NOT DELETE

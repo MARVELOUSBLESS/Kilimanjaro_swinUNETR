@@ -66,17 +66,22 @@ def main():
     # path_2_img = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00387-000/BraTS-GLI-00387-000-seg.nii.gz"
     # view_data_shape(path_2_img)
 
+    # # On Compute Canada:
     # generate json file for GLI data containing the path to n fold cross validation data 
     # data_dir_gli_training:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
     # kfold_dict_gli_training:dict = kfold_data_dict(data_dir_gli_training, 5, out_json_file="brats23_africa_folds.json")
 
-    # generate json for GLI validation folder
-    data_dir_GLI_val:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
-    json_outdir:str = "./jsons/brats23_gli_test.json"
-    kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_GLI_val, 1, "testing", json_outdir)
+    # # generate json for GLI validation folder
+    # data_dir_GLI_val:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
+    # json_outdir:str = "./jsons/brats23_gli_test.json"
+    # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_GLI_val, 1, "testing", json_outdir)
 
     # Generate json file for sub saharan africa data
 
+    # # On Local PC
+    data_dir_SSA_training = "/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
+    json_dict_SSA_training = "/home/odcus/Software/Kilimanjaro_swinUNETR/jsons/brats23_ssa_train.json"
+    kfold_dict_SSA_trainng = kfold_data_dict(data_dir_SSA_training, 5, data_use="training", out_json_file=json_dict_SSA_training)
     
 
 # DO NOT DELETE

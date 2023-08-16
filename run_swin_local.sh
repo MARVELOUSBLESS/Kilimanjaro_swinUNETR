@@ -1,15 +1,19 @@
 source /home/odcus/Software/Kilimanjaro_swinUNETR/SWIN_ENV/bin/activate
 # export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+PYTHONPATH="/home/odcus/Software/Kilimanjaro_swinUNETR/"
 
 path_swin='/home/odcus/Software/Kilimanjaro_swinUNETR/'
 path_data='/home/odcus/Data/BraTS_Africa_data/'
 
-# code to train the model
+# code to generate k fold cross validation json file
+# python $path_swin"kilimajaro_scripts/kfold_json_generator.py"
+
+# # code to train the model
 python $path_swin'main.py'\
  --pretrained_dir=$path_swin'/pretrained_models'\
  --pretrained_model_name='model-epoch100-baseModel-2023.pt'\
  --resume_ckpt --distributed --lrschedule='warmup_cosine'\
- --json_list=$path_swin'jsons/brats23_africa_folds.json'\
+ --json_list=$path_swin'jsons/brats23_ssa_train.json'\
  --sw_batch_size=8\
  --batch_size=2\
  --data_dir=$path_data\

@@ -9,7 +9,7 @@ module load python/3.9
 source /home/guest183/run_swinUNETR_kilimanjaro/SWIN_ENV/bin/activate
 
 # # Code to generate a joson file for a given training or testing data folder
-# python kfold_json_generator.py
+python kfold_json_generator.py 
 
 
 # Brats 2021
