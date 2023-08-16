@@ -101,22 +101,22 @@ def main():
 
     # generate json for GLI validation folder
     # data_dir_GLI_val:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
-    json_outdir:str = "./jsons/brats23_gli_test.json"
+    # json_outdir:str = "./jsons/brats23_gli_test.json"
     # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_GLI_val, 1, "testing", json_outdir)
 
     # # Generate json file for sub saharan africa data
-    # # Training set
-    # data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
-    # json_outdir:str = "./jsons/brats23_ssa_train.json"
-    # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 5, "testing", json_outdir)
+    # Training set
+    data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
+    json_outdir:str = "./jsons/brats23_ssa_train_forVal.json"
+    kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 1, "testing", json_outdir)
 
-    # # # testing set
-    # data_dir_SSA_train:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
-    # json_outdir:str = "./jsons/brats23_ssa_train.json"
-    # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_train, 5, "testing", json_outdir)
+    # # testing set
+    # data_dir_SSA_test:str = "/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/"
+    # json_outdir:str = "./jsons/brats23_ssa_test.json"
+    # kfold_dict_GLI_testing:dict = kfold_data_dict(data_dir_SSA_test, 1, "testing", json_outdir)
 
-    dir_with_test_labels = "/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/epoch100_baseModel_GLI_test/"
-    remove_patient_from_json(dir_with_test_labels, json_outdir)
+    # dir_with_test_labels = "/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/epoch100_baseModel_GLI_test/"
+    # remove_patient_from_json(dir_with_test_labels, json_outdir)
     
 
 # DO NOT DELETE

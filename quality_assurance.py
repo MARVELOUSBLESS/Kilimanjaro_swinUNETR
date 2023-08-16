@@ -3,15 +3,29 @@ import os
 import  nibabel as nib
 import numpy as np
 import matplotlib
+import matplotlib.pyplot as plt
 from glob import glob
+import pandas as pd
 
 # libararies to load the model:
 import torch
 from monai.networks.nets import SwinUNETR
 
 # libraries to call another python scritp 
-import subprocess
-import sys
+# import subprocess
+# import sys
+
+# dataloader library to be debugged
+from utils.data_utils import get_loader
+import argparse
+
+# libarary hosting the brats multi channel transoformation
+from monai.transforms.utility.array import ConvertToMultiChannelBasedOnBratsClasses
+
+# to simulate the distributed multi-gpu envionment
+# import torch.distributed as dist
+
+
 
 def _test_save_image_png():
     # to test save_image_png
@@ -25,12 +39,12 @@ def _test_save_image_png():
 def save_image_png(img:np.array,slice_number:int,outname:str):
     r'''given a 3D numpy array, it will save a slice as a png image'''
     # Access the image data and display it
-    slice = img[:, :,img.shape[2] // 2]
+    # slice = img[:, :,img.shape[2] // 2]
     slice = img[:, :,slice_number]
     matplotlib.image.imsave(outname, slice)
     # matplotlib.image.imsave('./qa_output/'+os.path.basename(path_2_img).split(".")[0]+".png", slice)
 
-def load_1_nifti(path_2_img):
+def load_1_nifti(path_2_img) -> np.array:
     r"""Load the image using nibabel and return it as a numpy array"""
     return nib.load(path_2_img).get_fdata()
 
@@ -50,7 +64,7 @@ def load_model(path_2_model:str, model_shape:dict):
     """
     # initialize an empty model
     model = SwinUNETR(
-        img_size=128,
+        img_size=96,
         in_channels=model_shape.in_channels,
         out_channels=model_shape.out_channels,
         feature_size=model_shape.feature_size,
@@ -107,21 +121,29 @@ def load_patient_to_tensor(path_2_patient:str):
         
 
 def match_prediction_name(dir_predictions:str):
+    r'''Not needed anymore after updating the name of the predicted labels'''
 
     prediction_dir_list = glob(dir_predictions+'*.nii.gz')
 
     for old_pred_path in prediction_dir_list:
-        os.rename(old_pred_path, dir_predictions+"BraTS-GLI-"+"-".join(os.path.basename(old_pred_path).split(".")[0].split("-")[1:3])+"-seg.nii.gz")
-
+            os.rename(old_pred_path, dir_predictions+"BraTS-GLI-"+"-".join(os.path.basename(old_pred_path).split(".")[0].split("-")[1:3])+"-seg.nii.gz")
     # patient_number_list = ["BraTS-GLI-"+"-".join(os.path.basename(path_2_prediction).split(".")[0].split("-")[1:3])+"-seg.nii.gz" for path_2_prediction in glob(dir_predictions+'*.nii.gz')]
     # print(patient_number_list)
 
 
 def _test_compare_pred_and_groundTruth():
-    path_pred = "/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/BraTS-GLI-00085-000-seg.nii.gz"
-    path_groundTruth = '/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00085-000/BraTS-GLI-00085-000-seg.nii.gz'
-    out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
-    compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir)
+    # # For local computer
+    path_pred = "/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/4gpu_120_epoch/BraTS-GLI-00085-000-seg.nii.gz"
+    path_groundTruth = '/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00085-000/BraTS-GLI-00085-000-seg.nii.gz'
+    out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/"
+
+    # # For Compute Canada
+    # path_pred = "/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/BraTS-GLI-00085-000-seg.nii.gz"
+    # path_groundTruth = '/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/BraTS-GLI-00085-000/BraTS-GLI-00085-000-seg.nii.gz'
+    # out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
+    compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, 120)
+
+# def get_patient_number(label_path:"str") -> str:
 
 
 def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:str, slice_number:int):
@@ -140,8 +162,12 @@ def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:st
     assert os.path.basename(path_pred) == os.path.basename(path_groundTruth)
 
     patient_number = "BraTS-GLI-" + "-".join(os.path.basename(path_pred).split("-")[2:4])
+    path_t2f = path_groundTruth.split("-")[:-1]
+    path_t2f.append('t2f.nii.gz')
+    path_t2f = "-".join(path_t2f)
 
-    # load prediction, ground truth and subtract them
+    # load patient t2 scan, prediction, ground truth and subtract them
+    patient_t2f = load_1_nifti(path_t2f)
     pred = load_1_nifti(path_pred)
     groundTruth=load_1_nifti(path_groundTruth)
     difference = pred-groundTruth
@@ -150,12 +176,25 @@ def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:st
     if not os.path.exists(out_dir+patient_number):
         os.mkdir(out_dir+patient_number)
 
-    # save all the matricies
-    save_image_png(pred, slice_number, out_dir+patient_number +"/" + patient_number +"-seg-prediction.png")
-    save_image_png(groundTruth, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-groundTruth.png")
-    save_image_png(difference, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-difference.png")
+    # make a subplot with the t2f image, ground truth, prediction and difference
+    # assert if slice number is not out of bound of the image slice range
+    assert slice_number>=0 and slice_number<pred.shape[-1]
 
-def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, out_dir, slice_number:int):
+    fig, axes = plt.subplots(1, 4)
+    axes[0].imshow(patient_t2f[:, :, slice_number], cmap='gray')    
+    axes[1].imshow(groundTruth[:, :, slice_number], cmap='gray')
+    axes[2].imshow(pred[:, :, slice_number], cmap='gray')
+    axes[3].imshow(difference[:, :, slice_number], cmap='gray')
+    plt.show()
+    plt.savefig(out_dir+patient_number +"/" + patient_number + "college.png")    
+
+    # # save all the matricies
+    # save_image_png(pred, slice_number, out_dir+patient_number +"/" + patient_number +"-seg-prediction.png")
+    # save_image_png(groundTruth, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-groundTruth.png")
+    # save_image_png(difference, slice_number, out_dir+patient_number +"/" + patient_number + "-seg-difference.png")
+    
+
+def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, out_dir, slice_number:int, mode="training"):
     r""" given a directory full of predictions, this function will find the ground truth file for each prediction and compares
         the prediction with ground truth over all patients. 
     inputs:
@@ -170,28 +209,174 @@ def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, ou
     for path_pred in pred_all_paths:
         patient_number = "BraTS-GLI-" + "-".join(os.path.basename(path_pred).split("-")[2:4])
         path_groundTruth = dir_groundTruth_allPatients + patient_number + "/" + os.path.basename(path_pred)
-        # DEBUGGING{
+        # # DEBUGGING{
         # print(path_pred)
         # print(path_groundTruth)
         # break
-        # }
-        compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, slice_number)
+        # # }
+        if mode == "training":
+            compare_pred_and_groundTruth(path_pred, path_groundTruth, out_dir, slice_number)
+        else:
+            dir_scan = path_groundTruth.split("seg")[0]+"t2f.nii.gz"
+            visualize_predictions(path_pred, dir_scan, out_dir, slice_number)
+            # break
+
+
+def visualize_predictions(dir_pred_label: str, dir_scan: str, out_dir: str, slice_number:int):
+    r""" given the prediction label, if will generate a figure where the t2 flair scan and the segmentation are put next to each other
+    input:
+        - dir_pred_label := path to the label
+        - dir_scan := path to the patient t2 flair scan
+        - dir_out := path to the directory where the generated figure is stores
+        - slice_number := z slice at which the figure is generated
+    """
+    patient_number = "BraTS-GLI-" + "-".join(os.path.basename(dir_pred_label).split("-")[2:4])
+    # make patient folder in the out dir
+    if not os.path.exists(out_dir+patient_number):
+        os.mkdir(out_dir+patient_number)
+    # path_t2f = dir_scan.split("-")[:-1]
+    # path_t2f.append('t2f.nii.gz')
+    # path_t2f = "-".join(path_t2f)
+
+
+    # load the mask and t2 scan
+    pred = load_1_nifti(dir_pred_label)
+    t2f = load_1_nifti(dir_scan)
+
+    assert slice_number>=0 and slice_number<pred.shape[-1]
+
+    for slice in np.arange(0, pred.shape[-1], 10):
+        fig, axes = plt.subplots(1, 2)
+        axes[0].imshow(t2f[:, :, slice], cmap='gray')    
+        axes[1].imshow(pred[:, :, slice],)
+        # plt.show()
+        plt.savefig(out_dir+patient_number +"/" + patient_number + f"college_{slice}.png") 
+        plt.close(fig)
+           
+
+
+
+def intersection_ratio(pred:torch.Tensor, ground_truth:torch.Tensor) -> float:
+    r''' take the inserection between two boolean tensors and 
+    devide by the number of True enteries in the ground truth
+
+    '''
+    intersection = pred * ground_truth
+    ratio = np.sum(intersection==True) / np.sum(ground_truth==True)
+    return ratio
+
+def test_get_loader():
+    r''' this function tests the get_loader function in Brats21 SwinUnetr/utils/data_utils.py/get_loader(). 
+    inputs:
+        - data_dir:str := path to the input data directory
+        - datalist_json :json := path to the json dictionary with the path of each input data in each training fold
+        -   
+    
+    '''
+    path_data = '/home/odcus/Data/BraTS_Africa_data/'
+    path_json = './jsons/brats23_africa_folds.json'
+    # test_args = {'data_dir': path_data, 'json_list': path_json,
+    #             'fold': 0, 'roi_x': 96, 'roi_y': 96, 'roi_z': 96,
+    #             'test_mode': False, 'distributed': True, 'workers': 8,
+    #             'batch_size': 1, 
+    #              } 
+    test_args = argparse.Namespace()
+    test_args.data_dir = path_data
+    test_args.json_list = path_json
+    test_args.fold = 0
+    test_args.roi_x = 96
+    test_args.roi_y = 96
+    test_args.roi_z = 96
+    test_args.test_mode = False
+    test_args.distributed = False
+    test_args.workers = 8
+    test_args.batch_size = 1
+
+    # call the get_loader on the arguments
+    loader = get_loader(test_args)
+    train_loader = loader[0]
+    val_loader = loader[1]
+
+    test_results_tensor = torch.zeros([train_loader.sampler.num_samples, 6])
+
+    for idx, batch_data in enumerate(train_loader):
+        # print(idx, batch_data.data.numpy().flatten().tolist())        # if isinstance(batch_data, list):
+
+        # extract the image data and the label data from batch
+        data, target = batch_data["image"], batch_data["label"]
+        # extract the names of the image and label from the batch
+        image_dir = batch_data['image_meta_dict']['filename_or_obj']
+        label_dir = batch_data['label_meta_dict']['filename_or_obj'][0]
+        # seperate each channel
+        tumor_core = batch_data["label"][0][0]
+        whole_tumor = batch_data["label"][0][1]
+        enhancing_tumor = batch_data["label"][0][2]
+        # load the raw labels from file:
+        label_file_tensor = torch.Tensor(load_1_nifti(label_dir))
+        # print("a breaking point was here")
+    
+        test_results_tensor[idx] = torch.Tensor([
+            # num voxels in 
+                # tumor core
+            torch.count_nonzero(tumor_core).item(),
+            torch.sum(label_file_tensor==1.).item(),
+                # whole tumor
+            torch.count_nonzero(whole_tumor).item(),
+            torch.sum(label_file_tensor==2.).item(),
+                # enhancing tumor
+            torch.count_nonzero(enhancing_tumor).item(),
+            torch.sum(label_file_tensor==3.).item(),
+            # intersection ratio
+            # intersection_ratio()
+        ])
+        # print("a breaking point was here")
+
+    columns = pd.MultiIndex.from_product([['num voxels'], ['TC', 'WT', 'ET'], ['transformed', 'raw']], names=['test', 'tumor subregion', 'source'])
+    # in the future, we will add the intersection ratio test as well as the result of the dice score to the tests. 
+    # columns = pd.MultiIndex.from_product([['num voxels', 'intersection ratio'], ['TC', 'WT', 'ET'], ['transformed', 'raw']], names=['test', 'tumor subregion', 'source'])
+    
+    test_results_pd = pd.DataFrame(data=test_results_tensor, columns=columns)
+    test_results_pd.to_csv("./qa_output/results_get_loader_afterFix.csv")
+    return 0
+
 
 
 def main():
     # _test_save_image_png()      # test passed
     # _test_load_patient_to_tensor()   
     # _test_compare_pred_and_groundTruth()
+    # test_get_loader() # test passed
 
-    path_brats="/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-TrainingData/"
-    path_predictions="/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/4gpu_120_epoch/"
-    out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
-    # path_model='/home/guest183/research-contributions/SwinUNETR/BRATS21/runs/4_gpu_4_epochs/model_final.pt'
+    # #######################################
+    # # on compute canada
+    # GLI data
+    path_brats="/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
+    path_predictions="/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/epoch100_baseModel_GLI_test/"
+    out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/GLI/"
+    # SSA data
+    # path_brats="/scratch/guest183/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/"
+    # path_predictions="/home/guest183/research-contributions/SwinUNETR/BRATS21/outputs/epoch100_baseModel_SSA_test/"
+    # out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/SSA/"
 
-    # compare all the predictions against ground truth at depth 100. 
-    qa_all_predictions(path_predictions, path_brats, out_dir, 100)
+    # #######################################
+    # # on my local computer 
+    # path_brats="/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
+    # path_predictions="/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/"
+    # out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/GLI_tests/"
+
+
+    # # compare all the predictions against ground truth at depth 100. 
+    # qa_all_predictions(path_predictions, path_brats, out_dir, 100)
+
+    # # qa test case outputs
+    qa_all_predictions(path_predictions, path_brats, out_dir, 48, mode="testing")
 
     # match_prediction_name(path_predictions)
+
+    # test pred label shape:
+    # path_pred = "/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/BraTS-GLI-00560-001-seg.nii.gz"
+    # pred = load_1_nifti(path_pred)
+    # print(pred.shape)
 
 
  # DO NOT DELETE

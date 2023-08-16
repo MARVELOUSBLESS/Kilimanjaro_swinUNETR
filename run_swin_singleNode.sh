@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --account=def-training-wa
 #SBATCH --nodes=1
-#SBATCH --gpus-per-node=t4:4
+#SBATCH --gpus-per-node=t4:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --time=10:00:00
@@ -33,7 +33,7 @@ python $path_swin'main.py'\
  --sw_batch_size=8 --batch_size=2 --infer_overlap=0.7\
  --max_epochs=100 --val_every=25 --lrschedule='warmup_cosine'\
  --out_channels=3 --in_channels=4 --spatial_dims=3\
- --feature_size=48 --logdir='epoch_test'
+ --feature_size=48 --logdir='epoch150_baseModel_resumeckpt_dataSSA'
 
 # --resume_ckpt --pretrained_dir=$path_swin'runs/4_gpu_60_epochs/' --pretrained_model_name='model_final.pt'
 # 
