@@ -161,7 +161,7 @@ def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:st
     """
     assert os.path.basename(path_pred) == os.path.basename(path_groundTruth)
 
-    patient_number = "BraTS-GLI-" + "-".join(os.path.basename(path_pred).split("-")[2:4])
+    patient_number = "-".join(os.path.basename(path_pred).split("-")[0:-1])
     path_t2f = path_groundTruth.split("-")[:-1]
     path_t2f.append('t2f.nii.gz')
     path_t2f = "-".join(path_t2f)
@@ -180,13 +180,23 @@ def compare_pred_and_groundTruth(path_pred:str, path_groundTruth:str, out_dir:st
     # assert if slice number is not out of bound of the image slice range
     assert slice_number>=0 and slice_number<pred.shape[-1]
 
-    fig, axes = plt.subplots(1, 4)
-    axes[0].imshow(patient_t2f[:, :, slice_number], cmap='gray')    
-    axes[1].imshow(groundTruth[:, :, slice_number], cmap='gray')
-    axes[2].imshow(pred[:, :, slice_number], cmap='gray')
-    axes[3].imshow(difference[:, :, slice_number], cmap='gray')
-    plt.show()
-    plt.savefig(out_dir+patient_number +"/" + patient_number + "college.png")    
+    for slice in np.arange(0, pred.shape[-1], 10):
+        fig, axes = plt.subplots(1, 4, figsize=[15, 5])
+        axes[0].imshow(patient_t2f[:, :, slice], cmap='gray')    
+        axes[0].set_title("T2 Flair Image")
+        axes[1].imshow(groundTruth[:, :, slice],)
+        axes[1].set_title("Ground Truth Label")
+        axes[2].imshow(pred[:, :, slice],)
+        axes[2].set_title("Predicted Label")
+        axes[3].imshow(difference[:, :, slice],)
+        axes[3].set_title("Difference(Predicted-Ground Truth)")
+        # cax = fig.axes([0.85, 0.1, 0.075, 0.8])
+        # fig.colorbar(cax=cax)
+        fig.tight_layout()
+        # plt.show()
+        plt.savefig(out_dir+patient_number +"/" + patient_number + f"college_{slice}.png") 
+        plt.close(fig)   
+
 
     # # save all the matricies
     # save_image_png(pred, slice_number, out_dir+patient_number +"/" + patient_number +"-seg-prediction.png")
@@ -207,7 +217,7 @@ def qa_all_predictions(dir_pred_allPatients:str, dir_groundTruth_allPatients, ou
     pred_all_paths = glob(dir_pred_allPatients+'*.nii.gz')
 
     for path_pred in pred_all_paths:
-        patient_number = "BraTS-GLI-" + "-".join(os.path.basename(path_pred).split("-")[2:4])
+        patient_number = "-".join(os.path.basename(path_pred).split("-")[0:-1])
         path_groundTruth = dir_groundTruth_allPatients + patient_number + "/" + os.path.basename(path_pred)
         # # DEBUGGING{
         # print(path_pred)
@@ -247,8 +257,13 @@ def visualize_predictions(dir_pred_label: str, dir_scan: str, out_dir: str, slic
 
     for slice in np.arange(0, pred.shape[-1], 10):
         fig, axes = plt.subplots(1, 2)
-        axes[0].imshow(t2f[:, :, slice], cmap='gray')    
+        axes[0].imshow(t2f[:, :, slice], cmap='gray') 
+        axes[0].set_title("T2 Flair Image")
+
         axes[1].imshow(pred[:, :, slice],)
+        axes[2].set_title("Predicted Label")
+        fig.tight_layout()
+
         # plt.show()
         plt.savefig(out_dir+patient_number +"/" + patient_number + f"college_{slice}.png")    
 
@@ -351,10 +366,16 @@ def main():
     # out_dir = "/home/guest183/research-contributions/SwinUNETR/BRATS21/qa_output/"
 
     # # on my local computer 
-    path_brats="/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
-    path_predictions="/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/"
-    out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/GLI_tests/"
+    # GLI tests
+    # path_brats="/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-GLI-Challenge-ValidationData/"
+    # path_predictions="/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/"
+    # out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/GLI_tests/"
 
+    # SSA training
+    path_brats="/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
+    path_predictions="/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/output_baseModel_train100EpochGLI_valSSAtrain/"
+    out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/SSA_train/"
+    qa_all_predictions(path_predictions, path_brats, out_dir, 100)
 
     # # compare all the predictions against ground truth at depth 100. 
     # qa_all_predictions(path_predictions, path_brats, out_dir, 100)
@@ -365,9 +386,9 @@ def main():
     # match_prediction_name(path_predictions)
 
     # test pred label shape:
-    path_pred = "/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/BraTS-GLI-00560-001-seg.nii.gz"
-    pred = load_1_nifti(path_pred)
-    print(pred.shape)
+    # path_pred = "/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/epoch100_baseModel_GLI_test/BraTS-GLI-00560-001-seg.nii.gz"
+    # pred = load_1_nifti(path_pred)
+    # print(pred.shape)
 
 
  # DO NOT DELETE
