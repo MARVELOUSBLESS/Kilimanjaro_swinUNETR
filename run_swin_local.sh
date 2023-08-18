@@ -6,9 +6,13 @@ path_swin='/home/odcus/Software/Kilimanjaro_swinUNETR/'
 path_data='/home/odcus/Data/BraTS_Africa_data/'
 
 # code to generate k fold cross validation json file
-# python $path_swin"kilimajaro_scripts/kfold_json_generator.py"
+python $path_swin"kilimajaro_scripts/kfold_json_generator.py"\
+    --data_folder_path=$path_data"ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData_V2/"\
+    --json_file_path=$path_swin"jsons/Brats23_SSA_Training.json"\
+    --num_folds=5 --data_use="training"\
 
-# # code to train the model
+
+# code to train the model
 # python $path_swin'main.py'\
 #  --pretrained_dir=$path_swin'runs/epoch_50_local_dataSSA_resumeCheckpoint_from_GLI100epochs/'\
 #  --pretrained_model_name='model_final.pt'\
@@ -32,4 +36,4 @@ path_data='/home/odcus/Data/BraTS_Africa_data/'
 # python $path_swin'test.py' --data_dir=$path_data --exp_name='4gpu_120_epoch' --json_list=$path_swin'jsons/brats23_africa_validation_folds.json' --pretrained_dir=$path_swin'runs/4_gpu_120_epochs' --pretrained_model_name='model_final.pt' --infer_overlap=0.7
 
 # # code to run quality assurance on the results of the test
-python $path_swin'kilimajaro_scripts/quality_assurance.py'
+# python $path_swin'kilimajaro_scripts/quality_assurance.py'
