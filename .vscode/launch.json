@@ -19,7 +19,7 @@
                 // "MASTER_ADDR": "localhost",
                 // "MASTER_PORT": "54589"
             },
-            "args":[]
+            // "args":[]
             // for testing SWINUNETR model
             // "args":[
             //     "--infer_overlap","0.7", 
@@ -30,19 +30,19 @@
             //     "--pretrained_model_name", "model-epoch100-baseModel-2023.pt"
             // ]
             // for training SWINUNETR model
-            // "args":[ "--pretrained_dir", "/home/odcus/Software/Kilimanjaro_swinUNETR/pretrained_models",
-            //  "--pretrained_model_name", "model-epoch100-baseModel-2023.pt",
-            //  "--resume_ckpt",
-            //  "--lrschedule", "warmup_cosine", "--json_list",
-            //  "./jsons/brats23_africa_folds.json", "--sw_batch_size",
-            //   "8", "--batch_size", "2", "--data_dir", 
-            //   "/home/odcus/Data/BraTS_Africa_data/", 
-            //   "--val_every", "1", "--infer_overlap", "0.7", 
-            //   "--out_channels", "3", "--in_channels", "4", 
-            //   "--spatial_dims", "3", "--save_checkpoint", 
-            //   "--use_checkpoint", "--feature_size", "48", 
-            //   "--max_epochs", "10", "--logdir", 
-            //   "local_resumeCheckpoint_test"]
+            "args":[ "--pretrained_dir", "/home/odcus/Software/Kilimanjaro_swinUNETR/pretrained_models",
+             "--pretrained_model_name", "model-epoch100-baseModel-2023.pt",
+             "--resume_ckpt",
+             "--lrschedule", "warmup_cosine", "--json_list",
+             "./jsons/brats23_africa_folds.json", "--sw_batch_size",
+              "8", "--batch_size", "2", "--data_dir", 
+              "/home/odcus/Data/BraTS_Africa_data/", 
+              "--val_every", "1", "--infer_overlap", "0.7", 
+              "--out_channels", "3", "--in_channels", "4", 
+              "--spatial_dims", "3", "--save_checkpoint", 
+              "--use_checkpoint", "--feature_size", "48", 
+              "--max_epochs", "10", "--logdir", 
+              "local_resumeCheckpoint_test"]
         }
     ]
 }
