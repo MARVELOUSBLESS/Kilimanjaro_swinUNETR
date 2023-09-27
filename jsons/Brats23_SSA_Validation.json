@@ -1,0 +1,139 @@
+{
+    "testing": [
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00139-000/BraTS-SSA-00139-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00139-000/BraTS-SSA-00139-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00139-000/BraTS-SSA-00139-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00139-000/BraTS-SSA-00139-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00158-000/BraTS-SSA-00158-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00158-000/BraTS-SSA-00158-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00158-000/BraTS-SSA-00158-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00158-000/BraTS-SSA-00158-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00126-000/BraTS-SSA-00126-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00126-000/BraTS-SSA-00126-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00126-000/BraTS-SSA-00126-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00126-000/BraTS-SSA-00126-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00143-000/BraTS-SSA-00143-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00143-000/BraTS-SSA-00143-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00143-000/BraTS-SSA-00143-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00143-000/BraTS-SSA-00143-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00227-000/BraTS-SSA-00227-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00227-000/BraTS-SSA-00227-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00227-000/BraTS-SSA-00227-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00227-000/BraTS-SSA-00227-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00218-000/BraTS-SSA-00218-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00218-000/BraTS-SSA-00218-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00218-000/BraTS-SSA-00218-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00218-000/BraTS-SSA-00218-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00188-000/BraTS-SSA-00188-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00188-000/BraTS-SSA-00188-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00188-000/BraTS-SSA-00188-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00188-000/BraTS-SSA-00188-000-t2f.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00180-000/BraTS-SSA-00180-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00180-000/BraTS-SSA-00180-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00180-000/BraTS-SSA-00180-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00180-000/BraTS-SSA-00180-000-t1n.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00198-000/BraTS-SSA-00198-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00198-000/BraTS-SSA-00198-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00198-000/BraTS-SSA-00198-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00198-000/BraTS-SSA-00198-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00169-000/BraTS-SSA-00169-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00169-000/BraTS-SSA-00169-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00169-000/BraTS-SSA-00169-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00169-000/BraTS-SSA-00169-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00129-000/BraTS-SSA-00129-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00129-000/BraTS-SSA-00129-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00129-000/BraTS-SSA-00129-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00129-000/BraTS-SSA-00129-000-t2w.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00210-000/BraTS-SSA-00210-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00210-000/BraTS-SSA-00210-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00210-000/BraTS-SSA-00210-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00210-000/BraTS-SSA-00210-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00192-000/BraTS-SSA-00192-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00192-000/BraTS-SSA-00192-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00192-000/BraTS-SSA-00192-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00192-000/BraTS-SSA-00192-000-t1n.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00148-000/BraTS-SSA-00148-000-t2f.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00148-000/BraTS-SSA-00148-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00148-000/BraTS-SSA-00148-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00148-000/BraTS-SSA-00148-000-t1c.nii.gz"
+            ]
+        },
+        {
+            "fold": 0,
+            "image": [
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00132-000/BraTS-SSA-00132-000-t1c.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00132-000/BraTS-SSA-00132-000-t2w.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00132-000/BraTS-SSA-00132-000-t1n.nii.gz",
+                "ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/BraTS-SSA-00132-000/BraTS-SSA-00132-000-t2f.nii.gz"
+            ]
+        }
+    ]
+}

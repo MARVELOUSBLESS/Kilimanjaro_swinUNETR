@@ -240,7 +240,7 @@ def visualize_predictions(dir_pred_label: str, dir_scan: str, out_dir: str, slic
         - dir_out := path to the directory where the generated figure is stores
         - slice_number := z slice at which the figure is generated
     """
-    patient_number = "BraTS-GLI-" + "-".join(os.path.basename(dir_pred_label).split("-")[2:4])
+    patient_number = "-".join(os.path.basename(dir_pred_label).split("-")[2:4])
     # make patient folder in the out dir
     if not os.path.exists(out_dir+patient_number):
         os.mkdir(out_dir+patient_number)
@@ -261,7 +261,7 @@ def visualize_predictions(dir_pred_label: str, dir_scan: str, out_dir: str, slic
         axes[0].set_title("T2 Flair Image")
 
         axes[1].imshow(pred[:, :, slice],)
-        axes[2].set_title("Predicted Label")
+        axes[1].set_title("Predicted Label")
         fig.tight_layout()
 
         # plt.show()
@@ -372,10 +372,15 @@ def main():
     # out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/GLI_tests/"
 
     # SSA training
-    path_brats="/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
-    path_predictions="/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/output_baseModel_train100EpochGLI_valSSAtrain/"
-    out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/SSA_train/"
-    qa_all_predictions(path_predictions, path_brats, out_dir, 100)
+    # path_brats="/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData/"
+    # path_predictions="/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/output_baseModel_train100EpochGLI_valSSAtrain/"
+    # out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/SSA_train/"
+    # qa_all_predictions(path_predictions, path_brats, out_dir, 100)
+
+    path_brats = "/home/odcus/Data/BraTS_Africa_data/ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/"
+    path_predictions = "/home/odcus/Software/Kilimanjaro_swinUNETR/outputs/final_ssa_validation/"
+    out_dir = "/home/odcus/Software/Kilimanjaro_swinUNETR/qa_output/SSA_Validation/"
+    qa_all_predictions(path_predictions, path_brats, out_dir, slice_number=100, mode="testing")
 
     # # compare all the predictions against ground truth at depth 100. 
     # qa_all_predictions(path_predictions, path_brats, out_dir, 100)

@@ -1,28 +1,28 @@
 source /home/odcus/Software/Kilimanjaro_swinUNETR/SWIN_ENV/bin/activate
 # export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
-export PYTHONPATH="/home/odcus/Software/Kilimanjaro_swinUNETR/"
+# export PYTHONPATH="/home/odcus/Software/Kilimanjaro_swinUNETR/"
 
 path_swin='/home/odcus/Software/Kilimanjaro_swinUNETR/'
 path_data='/home/odcus/Data/BraTS_Africa_data/'
 
-# code to generate k fold cross validation json file
-# python $path_swin"kilimajaro_scripts/kfold_json_generator.py"\
-#     --data_folder_path=$path_data"ASNR-MICCAI-BraTS2023-SSA-Challenge-TrainingData_V2/"\
-#     --json_file_path=$path_swin"jsons/Brats23_SSA_Training.json"\
-#     --num_folds=5 --data_use="training"\
+# # code to generate k fold cross validation json file
+python $path_swin"kilimajaro_scripts/kfold_json_generator.py"\
+    --data_folder_path=$path_data"ASNR-MICCAI-BraTS2023-SSA-Challenge-ValidationData/"\
+    --json_file_path=$path_swin"jsons/Brats23_SSA_Validation.json"\
+    --num_folds=1 --data_use="testing"\
 
 
 # code to train the model
-python $path_swin'main.py'\
-    --pretrained_dir=$path_swin'pretrained_models/'\
-    --pretrained_model_name='model-epoch100-baseModel-2023.pt'\
-    --resume_ckpt --distributed --lrschedule='warmup_cosine'\
-    --json_list=$path_swin'jsons/Brats23_SSA_Training.json'\
-    --warmup_epochs=10 --sw_batch_size=8 --batch_size=1 --fold=0\
-    --data_dir=$path_data --val_every=25 --infer_overlap=0.7\
-    --out_channels=3 --in_channels=4 --spatial_dims=3\
-    --save_checkpoint --use_checkpoint --feature_size=48\
-    --max_epochs=100 --logdir='epoch_100_fold0_local_dataSSA_resumeCheckpoint_from_GLI100epochs' 
+# python $path_swin'main.py'\
+#     --pretrained_dir=$path_swin'pretrained_models/'\
+#     --pretrained_model_name='model-epoch100-baseModel-2023.pt'\
+#     --resume_ckpt --distributed --lrschedule='warmup_cosine'\
+#     --json_list=$path_swin'jsons/Brats23_SSA_Training.json'\
+#     --warmup_epochs=10 --sw_batch_size=8 --batch_size=1 --fold=0\
+#     --data_dir=$path_data --val_every=25 --infer_overlap=0.7\
+#     --out_channels=3 --in_channels=4 --spatial_dims=3\
+#     --save_checkpoint --use_checkpoint --feature_size=48\
+#     --max_epochs=100 --logdir='epoch_100_fold0_local_dataSSA_resumeCheckpoint_from_GLI100epochs' 
 
 # options for training
 #   to continue the training of a pre-trained model:
